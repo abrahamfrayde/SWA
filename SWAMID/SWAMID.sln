@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sistema", "Sistema", "{A869874D-313A-481B-AC75-75E129A79FC0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentación", "Documentación", "{0D0B975C-651F-4012-93CF-F1AA0727BD94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagramas", "Diagramas", "{3BD01DDB-FA01-4832-9CD2-549D1936E091}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modulos", "Modulos", "{359C96BE-35D3-4497-BE24-1F776777AA47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solicitudes", "Solicitudes", "{A66E98E8-88D3-4D26-B348-D38F0649C724}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3BD01DDB-FA01-4832-9CD2-549D1936E091} = {0D0B975C-651F-4012-93CF-F1AA0727BD94}
+		{A66E98E8-88D3-4D26-B348-D38F0649C724} = {359C96BE-35D3-4497-BE24-1F776777AA47}
+	EndGlobalSection
+EndGlobal
