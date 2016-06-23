@@ -46,10 +46,10 @@
     <Compile Include="Catálogos\CatRamas.cs" />
     <Compile Include="Catálogos\CatStatus.cs" />
     <Compile Include="Catálogos\CatTiposSolicitud.cs" />
+    <Compile Include="CentrosCostos.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuPerfil.cs" />
     <Compile Include="Perfiles.cs" />
-    <Compile Include="Permisos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuarios.cs" />
   </ItemGroup>

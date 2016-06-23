@@ -126,9 +126,9 @@
             <ItemTemplate>
                 <asp:Literal ID="ltrliprincipal" runat="server"></asp:Literal>
                   <%--<asp:HyperLink NavigateUrl='<%#DataBinder.Eval(Container.DataItem, "urlmenu")%>' runat="server" >--%>
-                <a href='<%#DataBinder.Eval(Container.DataItem, "urlmenu")%>' runat="server"> 
-                    <i class='<%# DataBinder.Eval(Container.DataItem, "icono")%>'></i> 
-                    <span><%# DataBinder.Eval(Container.DataItem, "nommenu")%></span> 
+                <a href='<%#DataBinder.Eval(Container.DataItem, "cURLMenu")%>' runat="server"> 
+                    <i class='<%# DataBinder.Eval(Container.DataItem, "cIcono")%>'></i> 
+                    <span><%# DataBinder.Eval(Container.DataItem, "cNombreMenu")%></span> 
                     <asp:Literal ID="ltrcollapse" runat="server"></asp:Literal>
                   </a>
                   <asp:Literal ID="ltrlSubMenu" runat="server"></asp:Literal>

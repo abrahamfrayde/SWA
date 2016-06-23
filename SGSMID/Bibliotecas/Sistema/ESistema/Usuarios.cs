@@ -8,33 +8,35 @@ namespace ESistema
 {
     public class Usuarios
     {
-        public int IdUser { get; set; }
-        public string Username { get; set; }
-        public bool Activo { get; set; }
-        public string Password { get; set; }
-        public bool Visible { get; set; }
-        public Perfiles Perfil { get; set; }
-        public String FechaRegistro { get; set; }
-        public int IdUserGestion { get; set; }
-        public bool Versesiones { get; set; }
+        public int iIdUsuario { get; set; }
+        public string cNombreUsuario { get; set; }
+        public bool bActivo { get; set; }
+        public string cPassword { get; set; }
+        public bool bVisible { get; set; }
+        public Perfiles objPerfil { get; set; }
+        public String dtFechaAlta { get; set; }
+        public int iIdUsuarioGestion { get; set; }
+       
     }
 
     public class UsuariosDatos
     {
         
-        public Usuarios User { get; set; }
-        public int IdUser { get { return User.IdUser; } }
-        public int IdUserDatos { get; set; }
+        public Usuarios objUsuario { get; set; }
+        public int iIdUsuario { get { return objUsuario.iIdUsuario; } }
+        public int iIdUsuarioDatos { get; set; }
         public int IdUserMostrar { get; set; }
         public int IdUserSesion { get; set; }
-        public string NombreUser { get; set; }
-        public string ApellidoPat { get; set; }
-        public string ApellidoMat { get; set; }
+        public string cNombre { get; set; }
+        public string cApellidoPaterno { get; set; }
+        public string cApellidoMaterno { get; set; }
        
-        public CatPuestos ObjPuestos { get; set; }
+        public CatPuestos objPuesto { get; set; }
     
-        public string NombreCompleto { get; set; }
-        public int IdJefe { get; set; }
+        public string cNombreCompleto { get; set; }
+        public string cNombreCentroCosto { get; set; }
+        public int iNumeroEmpleado { get; set; }
+        public int iIdCentroCosto { get; set; }
 
     }
 }

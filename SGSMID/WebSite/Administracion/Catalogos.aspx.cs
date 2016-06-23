@@ -69,7 +69,8 @@ public partial class Administracion_Catalogos : System.Web.UI.Page
             if (Catalogo.Value == "Puestos")
             {
                 _catpuesto = new CatPuestos();
-                _catpuesto.descripcion = txtDescripcionNuevo.Text;
+                _catpuesto.cNombre = txtDescripcionNuevo.Text;
+                _catpuesto.iIdUsuarioGestion = (int) Session["IdUser"];
                 _catpuesneg.insertarPuesto(_catpuesto);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "ModalNuevo", "$('#ModalNuevo').modal('hide');", true);
                 upModalNuevo.Update();
@@ -102,7 +103,7 @@ public partial class Administracion_Catalogos : System.Web.UI.Page
         if (Catalogo.Value == "Puestos")
         {
             _catpuesto = new CatPuestos();
-            _catpuesto.idpuesto = Convert.ToInt32(ID.Value.ToString());
+            _catpuesto.iIdPuesto = Convert.ToInt32(ID.Value.ToString());
             _catpuesneg.eliminarPuesto(_catpuesto);
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "ModalEliminar", "$('#ModalEliminar').modal('hide');", true);
             upModalEliminar.Update();
@@ -124,8 +125,8 @@ public partial class Administracion_Catalogos : System.Web.UI.Page
             if (Catalogo.Value == "Puestos")
             {
                 _catpuesto = new CatPuestos();
-                _catpuesto.idpuesto = Convert.ToInt32(ID.Value.ToString());
-                _catpuesto.descripcion = txtDescripcionEditar.Text;
+                _catpuesto.iIdPuesto = Convert.ToInt32(ID.Value.ToString());
+                _catpuesto.cNombre = txtDescripcionEditar.Text;
                 _catpuesneg.modificarPuesto(_catpuesto);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "ModalEditar", "$('#ModalEditar').modal('hide');", true);
                 upModalEditar.Update();

@@ -28,19 +28,19 @@ namespace DSistema
                 using (SqlCommand command = new SqlCommand("SPD_MENUS_BYPERFIL", cn.Connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idperfil", idperfil);
+                    command.Parameters.AddWithValue("@iIdPerfil", idperfil);
                     cn.OpenConnection();
                     SqlDataReader reader = command.ExecuteReader();
                     
                     while (reader.Read())
                     {
                         ent = new Menu();
-                        ent.Idmenu = (int)reader["idmenu"];
-                        ent.nommenu = (string)reader["nommenu"];
-                        ent.urlmenu = (string)reader["urlmenu"];
-                        ent.orden = (int)reader["orden"];
-                        ent.idpadre = (int)reader["idpadre"];
-                        ent.icono = (string)reader["icono"];
+                        ent.iIdMenu = (int)reader["iIdMenu"];
+                        ent.cNombreMenu = (string)reader["cNombreMenu"];
+                        ent.cURLMenu = (string)reader["cURLMenu"];
+                        ent.iOrden = (int)reader["iOrden"];
+                        ent.iIdPadre = (int)reader["iIdPadre"];
+                        ent.cIcono = (string)reader["cIcono"];
                         list.Add(ent);
                     }
                 }

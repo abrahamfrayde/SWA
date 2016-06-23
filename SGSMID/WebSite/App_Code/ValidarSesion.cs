@@ -20,7 +20,7 @@ public class ValidarSesion
 	}
     public static bool sesionactiva()
     {
-        Usuarios UserMaster = new Usuarios() { Perfil = new Perfiles() };
+        Usuarios UserMaster = new Usuarios() { objPerfil = new Perfiles() };
         UserMaster = HttpContext.Current.Session["Usuario"] as Usuarios;
         if (UserMaster == null)
         {

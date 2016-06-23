@@ -25,12 +25,12 @@ namespace DSistema
             int id = 0;
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_menuperfiles_ins", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_MENUPERFILES_INS", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idmenu", _objmenu.Idmenu);
-                    command.Parameters.AddWithValue("@idperfil", _objperfil.IdPerfil);
-                    command.Parameters.AddWithValue("@usergestiono", _objperfil.IdUsuario);
+                    command.Parameters.AddWithValue("@iIdMenu", _objmenu.iIdMenu);
+                    command.Parameters.AddWithValue("@iIdPerfil", _objperfil.iIdPerfil);
+                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _objperfil.iIdUsuarioGestion);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();
                 }
@@ -55,7 +55,7 @@ namespace DSistema
             {
 
                 eliminarMenuPerfiles(_objperfil);
-                foreach (ESistema.Menu _objmenu in _lstmenu.GroupBy(i => i.Idmenu).Select(g => g.First()).ToList())
+                foreach (ESistema.Menu _objmenu in _lstmenu.GroupBy(i => i.iIdMenu).Select(g => g.First()).ToList())
                 {
 
                     insertarMenuPerfil(_objperfil, _objmenu);
@@ -81,10 +81,10 @@ namespace DSistema
            
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_menuperfiles_del", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_MENUPERFILES_DEL", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idperfil", _objperfil.IdPerfil);
+                    command.Parameters.AddWithValue("@iIdPerfil", _objperfil.iIdPerfil);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();
                 }
@@ -110,10 +110,10 @@ namespace DSistema
             MenuPerfil obj;
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_menuperfiles_get", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_MENUPERFILES_GET", cn.Connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idperfil", id == 0 ? (object)DBNull.Value : id);
+                    command.Parameters.AddWithValue("@iIdPerfil", id == 0 ? (object)DBNull.Value : id);
                     cn.OpenConnection();
                     SqlDataReader reader = command.ExecuteReader();
 
@@ -122,10 +122,10 @@ namespace DSistema
                         obj = new MenuPerfil();
                         obj.objMenu = new Menu();
                         obj.objPerfil = new Perfiles();
-                        obj.idmenuperfil = (int)reader["idmenuperfil"];
-                        obj.objMenu.Idmenu = (int)reader["idmenu"];
-                        obj.objPerfil.IdPerfil = (int)reader["idperfil"];
-                        obj.fecharegistro = (DateTime)reader["fecharegistro"];
+                        obj.iIdMenuPerfil = (int)reader["iIdMenuPerfil"];
+                        obj.objMenu.iIdMenu = (int)reader["iIdMenu"];
+                        obj.objPerfil.iIdPerfil = (int)reader["iIdPerfil"];
+                        obj.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
                         list.Add(obj);
                     }
                 }

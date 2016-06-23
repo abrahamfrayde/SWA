@@ -20,24 +20,24 @@ namespace DSistema
 
         public Usuarios Sigin(string user, string password)
         {
-            Usuarios usuario = new Usuarios() { Perfil=new Perfiles()};
+            Usuarios usuario = new Usuarios() { objPerfil=new Perfiles()};
             try
             {
                 using (SqlCommand command = new SqlCommand("SPD_USUARIO_SIGIN", cn.Connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@usuario", user);
-                    command.Parameters.AddWithValue("@pass", password);
+                    command.Parameters.AddWithValue("@cNombreUsuario", user);
+                    command.Parameters.AddWithValue("@cPassword", password);
 
                     cn.OpenConnection();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            usuario.IdUser=(int)reader["idusuario"];
-                            usuario.Username=(string)reader["username"];
-                            usuario.Perfil.IdPerfil=(int)reader["idperfil"];
-                            usuario.Perfil.NomPerfil=(string)reader["nomperfil"];
+                            usuario.iIdUsuario=(int)reader["iIdUsuario"];
+                            usuario.cNombreUsuario=(string)reader["cNombreUsuario"];
+                            usuario.objPerfil.iIdPerfil=(int)reader["iIdPerfil"];
+                            usuario.objPerfil.cNombre=(string)reader["cNombre"];
                         }
                     }
 
@@ -64,22 +64,20 @@ namespace DSistema
            // int id = 0;
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_usuarios_ins", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_USUARIOS_INS", cn.Connection))
                 {
                     
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@username", _catusuariosdatos.User.Username);
-                    command.Parameters.AddWithValue("@password", _catusuariosdatos.User.Password);
-                    command.Parameters.AddWithValue("@usergestiono", _catusuariosdatos.User.IdUserGestion);
-                    command.Parameters.AddWithValue("@idperfil", _catusuariosdatos.User.Perfil.IdPerfil);
-                    command.Parameters.AddWithValue("@nombre", _catusuariosdatos.NombreUser);
-                    command.Parameters.AddWithValue("@appat", _catusuariosdatos.ApellidoPat);
-                    command.Parameters.AddWithValue("@apmat", _catusuariosdatos.ApellidoMat);
-               
-                    command.Parameters.AddWithValue("@idpuesto", _catusuariosdatos.ObjPuestos.idpuesto);
-            
-                    command.Parameters.AddWithValue("@idjefe", _catusuariosdatos.IdJefe == 0 ? (object)DBNull.Value : _catusuariosdatos.IdJefe);
-                    command.Parameters.AddWithValue("@versesiones",_catusuariosdatos.User.Versesiones);
+                    command.Parameters.AddWithValue("@cNombreUsuario", _catusuariosdatos.objUsuario.cNombreUsuario);
+                    command.Parameters.AddWithValue("@cPassword", _catusuariosdatos.objUsuario.cPassword);
+                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _catusuariosdatos.objUsuario.iIdUsuarioGestion);
+                    command.Parameters.AddWithValue("@iIdPerfil", _catusuariosdatos.objUsuario.objPerfil.iIdPerfil);
+                    command.Parameters.AddWithValue("@cNombre", _catusuariosdatos.cNombre);
+                    command.Parameters.AddWithValue("@cApellidoPaterno", _catusuariosdatos.cApellidoPaterno);
+                    command.Parameters.AddWithValue("@cApellidoMaterno", _catusuariosdatos.cApellidoMaterno);
+                    command.Parameters.AddWithValue("@iNumeroEmpleado", _catusuariosdatos.iNumeroEmpleado);
+                    command.Parameters.AddWithValue("@iIdPuesto", _catusuariosdatos.objPuesto.iIdPuesto);
+                    command.Parameters.AddWithValue("@iIdCentroCosto", _catusuariosdatos.iIdCentroCosto == 0 ? (object)DBNull.Value : _catusuariosdatos.iIdCentroCosto);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();
                    // id = (int)command.ExecuteScalar();
@@ -106,20 +104,19 @@ namespace DSistema
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_usuarios_upd", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_USUARIOS_UPD", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idusuario", _catusuariosdatos.User.IdUser);
-                    command.Parameters.AddWithValue("@username", _catusuariosdatos.User.Username);
-                    command.Parameters.AddWithValue("@idperfil", _catusuariosdatos.User.Perfil.IdPerfil);
-                    command.Parameters.AddWithValue("@nombre", _catusuariosdatos.NombreUser);
-                    command.Parameters.AddWithValue("@appat", _catusuariosdatos.ApellidoPat);
-                    command.Parameters.AddWithValue("@apmat", _catusuariosdatos.ApellidoMat);
-                
-                    command.Parameters.AddWithValue("@idpuesto", _catusuariosdatos.ObjPuestos.idpuesto);
-  
-                    command.Parameters.AddWithValue("@idjefe", _catusuariosdatos.IdJefe == 0 ? (object)DBNull.Value : _catusuariosdatos.IdJefe);
-                    command.Parameters.AddWithValue("@versesiones", _catusuariosdatos.User.Versesiones);
+                    command.Parameters.AddWithValue("@iIdUsuario", _catusuariosdatos.objUsuario.iIdUsuario);
+                    command.Parameters.AddWithValue("@cNombreUsuario", _catusuariosdatos.objUsuario.cNombreUsuario);
+                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _catusuariosdatos.objUsuario.iIdUsuarioGestion);
+                    command.Parameters.AddWithValue("@iIdPerfil", _catusuariosdatos.objUsuario.objPerfil.iIdPerfil);
+                    command.Parameters.AddWithValue("@cNombre", _catusuariosdatos.cNombre);
+                    command.Parameters.AddWithValue("@cApellidoPaterno", _catusuariosdatos.cApellidoPaterno);
+                    command.Parameters.AddWithValue("@cApellidoMaterno", _catusuariosdatos.cApellidoMaterno);
+                    command.Parameters.AddWithValue("@iNumeroEmpleado", _catusuariosdatos.iNumeroEmpleado);
+                    command.Parameters.AddWithValue("@iIdPuesto", _catusuariosdatos.objPuesto.iIdPuesto);
+                    command.Parameters.AddWithValue("@iIdCentroCosto", _catusuariosdatos.iIdCentroCosto == 0 ? (object)DBNull.Value : _catusuariosdatos.iIdCentroCosto);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();
                 }
@@ -143,10 +140,10 @@ namespace DSistema
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_usuarios_del", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_USUARIOS_DEL", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idusuario", _catusuariosdatos.User.IdUser);
+                    command.Parameters.AddWithValue("@iIdUsuario", _catusuariosdatos.objUsuario.iIdUsuario);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();
                 }
@@ -169,11 +166,11 @@ namespace DSistema
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_usuarios_pass", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_USUARIOS_PASS", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idusuario", _catusuariosdatos.User.IdUser);
-                    command.Parameters.AddWithValue("@password", _catusuariosdatos.User.Password);
+                    command.Parameters.AddWithValue("@iIdUsuario", _catusuariosdatos.objUsuario.iIdUsuario);
+                    command.Parameters.AddWithValue("@cPassword", _catusuariosdatos.objUsuario.cPassword);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();
                 }
@@ -199,13 +196,13 @@ namespace DSistema
             UsuariosDatos _catusuariosdatos;
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_usuarios_get", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_USUARIOS_GET", cn.Connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@id", id == 0 ? (object)DBNull.Value : id);
+                    command.Parameters.AddWithValue("@iIdUsuario", id == 0 ? (object)DBNull.Value : id);
                     command.Parameters.AddWithValue("@filtro", string.IsNullOrEmpty(filtro) ? (object)DBNull.Value : filtro);
-                    command.Parameters.AddWithValue("@idpuesto", idpuesto == 0 ? (object)DBNull.Value : idpuesto);
-                    command.Parameters.AddWithValue("@idperfil", idperfil == 0 ? (object)DBNull.Value : idperfil);
+                    command.Parameters.AddWithValue("@iIdPuesto", idpuesto == 0 ? (object)DBNull.Value : idpuesto);
+                    command.Parameters.AddWithValue("@iIdPerfil", idperfil == 0 ? (object)DBNull.Value : idperfil);
                     
                     cn.OpenConnection();
                     SqlDataReader reader = command.ExecuteReader();
@@ -213,32 +210,23 @@ namespace DSistema
                     {
                         DateTime fechatemp;
                         _catusuariosdatos = new UsuariosDatos();
-                        _catusuariosdatos.User = new Usuarios();
-                        _catusuariosdatos.User.IdUser = (int)reader["idusuario"];
-                        _catusuariosdatos.User.Username = (string)reader["username"];
-                        _catusuariosdatos.User.Perfil = new Perfiles();
-                        _catusuariosdatos.User.Perfil.IdPerfil = (int)reader["idperfil"];
-                        _catusuariosdatos.User.Perfil.NomPerfil = (String)reader["nomperfil"];
-                        _catusuariosdatos.NombreUser = (string)reader["nombre"];
-                        _catusuariosdatos.ApellidoPat = (string)reader["appat"];
-                        _catusuariosdatos.ApellidoMat = (string)reader["apmat"];
-                        _catusuariosdatos.NombreCompleto = (string)reader["nombrecompleto"];
-                 
-                        _catusuariosdatos.ObjPuestos = new CatPuestos();
-                        _catusuariosdatos.ObjPuestos.idpuesto = (int)reader["idpuesto"];
-                        _catusuariosdatos.ObjPuestos.descripcion = (string)reader["nompuesto"];
-                        _catusuariosdatos.User.Versesiones = Convert.ToBoolean(reader["versesiones"]);
-                        if(string.IsNullOrEmpty(reader["idjefe"].ToString()))
-                        {
-                            _catusuariosdatos.IdJefe = 0;
-                        }
-                        else
-                        {
-                            _catusuariosdatos.IdJefe = (int)reader["idjefe"];
-                        }
-                     
-                        fechatemp  = (DateTime) (reader["fecharegistro"]);
-                        _catusuariosdatos.User.FechaRegistro = fechatemp.ToShortDateString();
+                        _catusuariosdatos.objUsuario = new Usuarios();
+                        _catusuariosdatos.objUsuario.iIdUsuario = (int)reader["iIdUsuario"];
+                        _catusuariosdatos.objUsuario.cNombreUsuario = (string)reader["cNombreUsuario"];
+                        _catusuariosdatos.objUsuario.objPerfil = new Perfiles();
+                        _catusuariosdatos.objUsuario.objPerfil.iIdPerfil = (int)reader["iIdPerfil"];
+                        _catusuariosdatos.objUsuario.objPerfil.cNombre = (String)reader["cNombrePerfil"];
+                        _catusuariosdatos.cNombre = (string)reader["cNombre"];
+                        _catusuariosdatos.cApellidoPaterno = (string)reader["cApellidoPaterno"];
+                        _catusuariosdatos.cApellidoMaterno = (string)reader["cApellidoMaterno"];
+                        _catusuariosdatos.cNombreCompleto = (string)reader["cNombreCompleto"];
+                        _catusuariosdatos.iNumeroEmpleado = (int)reader["iNumeroEmpleado"];
+                        _catusuariosdatos.iIdCentroCosto = (int)reader["iIdCentroCosto"];
+                        _catusuariosdatos.objPuesto = new CatPuestos();
+                        _catusuariosdatos.objPuesto.iIdPuesto = (int)reader["iIdPuesto"];
+                        _catusuariosdatos.objPuesto.cNombre = (string)reader["cNombrePuesto"];
+                        fechatemp  = (DateTime) (reader["dtFechaAlta"]);
+                        _catusuariosdatos.objUsuario.dtFechaAlta = fechatemp.ToShortDateString();
                         list.Add(_catusuariosdatos);
                     }
                 }
