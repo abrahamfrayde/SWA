@@ -25,10 +25,11 @@ namespace DSistema
             int id = 0;
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_cat_puestos_ins", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_CAT_PUESTOS_INS", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@descripcion", _catpuestos.descripcion);
+                    command.Parameters.AddWithValue("@cNombre", _catpuestos.cNombre);
+                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _catpuestos.iIdUsuarioGestion);
                     cn.OpenConnection();
                     id = (int)command.ExecuteScalar();
                  }
@@ -54,11 +55,11 @@ namespace DSistema
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_cat_puestos_upd", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_CAT_PUESTOS_UPD", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idpuesto", _catpuestos.idpuesto);
-                    command.Parameters.AddWithValue("@descripcion", _catpuestos.descripcion);
+                    command.Parameters.AddWithValue("@iIdPuesto", _catpuestos.iIdPuesto);
+                    command.Parameters.AddWithValue("@cNombre", _catpuestos.cNombre);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();
                  }
@@ -83,10 +84,10 @@ namespace DSistema
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_cat_puestos_del", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_CAT_PUESTOS_DEL", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idpuesto", _catpuestos.idpuesto);
+                    command.Parameters.AddWithValue("@iIdPuesto", _catpuestos.iIdPuesto);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();
                   }
@@ -112,7 +113,7 @@ namespace DSistema
             CatPuestos cat;
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_catalogos_get", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_CATALOGOS_GET", cn.Connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     //command.Parameters.AddWithValue("@idpuesto", id == 0 ? (object)DBNull.Value : id);
@@ -125,9 +126,9 @@ namespace DSistema
                         while (reader.Read())
                         {
                             cat = new CatPuestos();
-                            cat.idpuesto = (int)reader["idpuesto"];
-                            cat.descripcion = (string)reader["descripcion"];
-                            cat.fecharegistro = (DateTime)reader["fecharegistro"];
+                            cat.iIdPuesto = (int)reader["iIdPuesto"];
+                            cat.cNombre = (string)reader["cNombre"];
+                            cat.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
                             list.Add(cat);
                         }
                 }

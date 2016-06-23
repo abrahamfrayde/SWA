@@ -49,20 +49,22 @@
                         <div class="box-body">
                             <asp:UpdatePanel ID="UpdatePanelGridViewPerfiles" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <asp:GridView ID="GridViewPerfiles" CssClass="table table-bordered" runat="server" DataKeyNames="IdPerfil" AutoGenerateColumns="false" OnRowCommand="GridView_RowCommand">
+                                    <asp:GridView ID="GridViewPerfiles" CssClass="table table-bordered" runat="server" DataKeyNames="iIdPerfil" AutoGenerateColumns="false" OnRowCommand="GridView_RowCommand">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Nombre del Perfil">
                                                 <ItemTemplate>
-                                                       <asp:Label ID="NomPerfil" runat="server" Text='<%# Bind("NomPerfil") %>'><%# Eval("NomPerfil") %> </asp:Label>
+                                                       <asp:Label ID="NomPerfil" runat="server" Text='<%# Bind("cNombre") %>'><%# Eval("cNombre") %> </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                           
                                             <asp:TemplateField HeaderText="Alta">
                                                 <ItemTemplate>
-                                                    <asp:Label runat="server"><%# Eval("FechaRegistro") %> </asp:Label>
+                                                    <asp:HiddenField ID="cDescripcion" runat="server" Value='<%# Bind("cDescripcion") %>' />
+                                                    <asp:HiddenField ID="iIdCentroCosto" runat="server" Value='<%# Bind("iIdCentroCosto") %>' />
+                                                    <asp:Label runat="server"><%# Eval("dtFechaRegistro") %> </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Opciones" ItemStyle-Width="344px">
+                                            <asp:TemplateField HeaderText="Opciones" ItemStyle-Width="302px">
                                                 <ItemTemplate>
 
                                                     <asp:LinkButton ID="btnCambiarNombrePerfil"
@@ -70,7 +72,7 @@
                                                         CssClass="btn btn-primary btn-sm"
                                                         CommandName="CambiarNombrePerfil"
                                                         CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">
-  &nbsp; <span aria-hidden="true" class="fa fa-pencil"></span>&nbsp;&nbsp;Editar Nombre  
+  &nbsp; <span aria-hidden="true" class="fa fa-pencil"></span>&nbsp;&nbsp;Editar  
                                                     </asp:LinkButton>
                                                     <asp:LinkButton ID="btnEditarPermisos"
                                                         runat="server"
@@ -115,12 +117,44 @@
                                             <asp:Label ID="lblModalTitleEditar" runat="server" Text=""></asp:Label></h4>
                                     </div>
                                     <div class="modal-body">
-                                        <asp:TextBox ID="txtCambiarNombrePerfil" CssClass="form-control" runat="server"></asp:TextBox>
-                                        <div class="has-error">
-                                            <asp:Label CssClass="control-label" ID="lblMensajeEditar" runat="server" Visible="false" Text="">
-                    <i class="fa fa-times-circle-o"></i> El Campo no puede estar vacio
-                                            </asp:Label>
-                                        </div>
+                                         <div class="form-horizontal">
+                                         <div class="form-group">
+                                                <label class="col-sm-2 control-label">Nombre:</label><div class="col-sm-10">
+                                                    <asp:TextBox ID="txtCambiarNombrePerfil" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <div class="has-error">
+                                                        <asp:Label CssClass="control-label" ID="lblMensajeNombrePerfil" runat="server" Visible="false" Text="">
+                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
+                                                        </asp:Label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                              <div class="form-group">
+                                                <label class="col-sm-2 control-label">Descripción:</label><div class="col-sm-10">
+                                                    <asp:TextBox TextMode="multiline" style="resize:none" columns="50" row="5" ID="txtCambiarDescripcionPerfil" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <div class="has-error">
+                                                        <asp:Label CssClass="control-label" ID="lblMensajeDescripcionPerfil" runat="server" Visible="false" Text="">
+                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
+                                                        </asp:Label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                              <div class="form-group">
+                                                <label class="col-sm-2 control-label">Dirección: </label>
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropCambiarDireccion" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="dropCambiarDireccion_SelectedIndexChanged"></asp:DropDownList></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Subd: </label>
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropCambiarSubdireccion"  AutoPostBack="True" OnSelectedIndexChanged="dropCambiarSubdireccion_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Depto: </label>
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropCambiarDepartamento" CssClass="form-control"></asp:DropDownList></div>
+                                            </div>
+                                       
+                                      </div>
                                     </div>
                                     <div class="modal-footer">
                                         <asp:Button CssClass="btn btn-primary" ID="GuardarNombrePerfil" runat="server" Text="Guardar" OnClick="NombrePerfil_Click" />
@@ -168,18 +202,45 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-horizontal">
-                                            <div class="form-group">
-                                                <asp:label class="col-sm-2 control-label" runat="server" ID="EtiquetaNombrePerfil">Nombre: </asp:label>
+                                            <div id="camponombre" runat="server" class="form-group">
+                                                <asp:label class="col-sm-2 control-label"  visible="false" runat="server" ID="EtiquetaNombrePerfil">Nombre: </asp:label>
                                                 <div class="col-sm-10">
-                                                    <asp:TextBox ID="txtNombrePerfil" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="txtNombrePerfil"  visible="false" CssClass="form-control" runat="server"></asp:TextBox>
                                                     <div class="has-error">
-                                                        <asp:Label CssClass="control-label" ID="lblNombrePerfil" runat="server" Visible="false" Text="">
+                                                        <asp:Label CssClass="control-label"  ID="lblNombrePerfil" runat="server" Visible="false" Text="">
                     <i class="fa fa-times-circle-o"></i> Campo Obligatorio
                                                         </asp:Label>
                                                       </div>
                                                 </div>
                                             </div>
-                                           
+                                            <div class="form-group" id="campodescripcion" runat="server" >
+                                                  <asp:label class="col-sm-2 control-label"  runat="server"  visible="false" ID="lblDescripcion">Descripción: </asp:label>
+                                                <div class="col-sm-10">
+                                                    <asp:TextBox TextMode="multiline" style="resize:none" visible="false" columns="50" row="5" ID="txtDescripcionPerfil" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <div class="has-error">
+                                                        <asp:Label CssClass="control-label"  ID="lblMensajeDescripcionNuevoPerfil" runat="server" Visible="false" Text="">
+                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
+                                                        </asp:Label>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                              <div class="form-group" id="campodireccion" runat="server">
+                                                    <asp:label class="col-sm-2 control-label" runat="server"  visible="false" ID="lblDireccion">Dirección: </asp:label>
+                                               
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropUserDireccion"  visible="false"  CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="dropUserDireccion_SelectedIndexChanged"></asp:DropDownList></div>
+                                            </div>
+                                            <div class="form-group" id="camposubdireccion" runat="server">
+                                                  <asp:label class="col-sm-2 control-label" runat="server"  visible="false" ID="lblSubdireccion">Subd: </asp:label>
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropUserSubdireccion"  visible="false" AutoPostBack="True" OnSelectedIndexChanged="dropUserSubdireccion_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList></div>
+                                            </div>
+                                            <div class="form-group" id="campodepartamento" runat="server">
+                                                  <asp:label class="col-sm-2 control-label" runat="server"  visible="false" ID="lblDepartamento">Depto: </asp:label>
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropUserDepartamento"  visible="false" CssClass="form-control"></asp:DropDownList></div>
+                                            </div>
                                             <div class="form-group">
                                                 
                                                    <label class="col-sm-2 control-label">Permisos: </label>
@@ -187,6 +248,7 @@
                                                    <asp:CheckBoxList ID="chckboxlist" runat="server"></asp:CheckBoxList>
                                                      </div>
                                               </div>
+                                        </div>
                                          </div>
                                             <div class="modal-footer">
                                                 <asp:Button CssClass="btn btn-primary" ID="GuardarPerfil" runat="server" Text="Guardar" OnClick="Guardar_Click" />

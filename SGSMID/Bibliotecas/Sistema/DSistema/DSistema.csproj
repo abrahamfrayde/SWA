@@ -46,6 +46,7 @@
     <Compile Include="Catálogos\CatRamasDAL.cs" />
     <Compile Include="Catálogos\CatStatusDAL.cs" />
     <Compile Include="Catálogos\CatTiposSolicitudDAL.cs" />
+    <Compile Include="CentrosCostosDAL.cs" />
     <Compile Include="MenuDAL.cs" />
     <Compile Include="MenuPerfilDAL.cs" />
     <Compile Include="PerfilesDAL.cs" />

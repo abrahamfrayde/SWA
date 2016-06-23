@@ -48,8 +48,8 @@
                                 <ContentTemplate>
                                     <asp:GridView ID="GridViewPuestos" CssClass="table table-bordered" runat="server" AutoGenerateColumns="false" DataKeyNames="idpuesto" OnRowCommand="GridView_RowCommand">
                                         <Columns>
-                                            <asp:BoundField DataField="descripcion" HeaderText="Nombre" Visible="true" />
-                                            <asp:BoundField DataField="fecharegistro" HeaderText="Fecha Alta" Visible="true" />
+                                            <asp:BoundField DataField="cNombre" HeaderText="Nombre" Visible="true" />
+                                            <asp:BoundField DataField="dtFechaRegistro" HeaderText="Fecha Alta" Visible="true" />
                                             <asp:TemplateField HeaderText="Opciones" ItemStyle-Width="161px">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="btnEditarPuesto"

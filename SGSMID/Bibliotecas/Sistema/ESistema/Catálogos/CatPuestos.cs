@@ -12,10 +12,11 @@ namespace ESistema
     public class CatPuestos
     {
 
-        public int idpuesto { get; set; }
-        public string descripcion { get; set; }
-        public DateTime fecharegistro { get; set; }
-        public Boolean activo { get; set; }
+        public int iIdPuesto { get; set; }
+        public string cNombre { get; set; }
+        public DateTime dtFechaRegistro { get; set; }
+        public Boolean bActivo { get; set; }
+        public int iIdUsuarioGestion { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>

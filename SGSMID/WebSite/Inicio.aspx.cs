@@ -11,7 +11,8 @@ public partial class Inicio : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!ValidarSesion.sesionactiva())
+            Response.Redirect("~/Default.aspx");
         MenusBL bl = new MenusBL();
         UsuariosBL userbl = new UsuariosBL();
         if (!IsPostBack)
@@ -26,7 +27,7 @@ public partial class Inicio : System.Web.UI.Page
             }
             else
             {
-                nombrecompleto.Text = _lstusuariodatos[0].NombreCompleto;
+                nombrecompleto.Text = _lstusuariodatos[0].cNombreCompleto;
             
             }
 

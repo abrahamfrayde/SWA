@@ -24,12 +24,12 @@ public partial class Acceso_Login : System.Web.UI.Page
         try
         {
             usuario = bl.Sigin(txtmail.Text,txtpass.Text);
-            if (usuario.IdUser>0)
+            if (usuario.iIdUsuario>0)
             {
                 
                 Session["Usuario"] = usuario;
-                Session["IdUser"] = usuario.IdUser;
-                Session["IdRol"] = usuario.Perfil.IdPerfil;
+                Session["IdUser"] = usuario.iIdUsuario;
+                Session["IdRol"] = usuario.objPerfil.iIdPerfil;
                 Response.Redirect(vpd.VirtualPath);
                
             }

@@ -46,6 +46,7 @@
     <Compile Include="Catálogos\CatRamasBL.cs" />
     <Compile Include="Catálogos\CatStatusBL.cs" />
     <Compile Include="Catálogos\CatTiposSolicitudBL.cs" />
+    <Compile Include="CentrosCostosBL.cs" />
     <Compile Include="MenuPerfilBL.cs" />
     <Compile Include="MenusBL.cs" />
     <Compile Include="PerfilesBL.cs" />

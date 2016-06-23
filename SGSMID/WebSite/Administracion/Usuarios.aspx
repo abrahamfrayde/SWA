@@ -28,8 +28,6 @@
                                     <asp:TextBox runat="server" ID="txtNombreCompletoEmail" CssClass="form-control pull-right" Width="200px" />
                                     <div class="input-group-btn">
                                         <asp:DropDownList runat="server" ID="dropFiltroPerfil" CssClass="btn btn-default dropdown-toggle"></asp:DropDownList>
-                                        <asp:DropDownList runat="server" ID="dropFiltroSedes" CssClass="btn btn-default dropdown-toggle"></asp:DropDownList>
-                                        <asp:DropDownList runat="server" ID="dropFiltroDepartamento" CssClass="btn btn-default dropdown-toggle"></asp:DropDownList>
                                         <asp:DropDownList runat="server" ID="dropFiltroPuesto" CssClass="btn btn-default dropdown-toggle"></asp:DropDownList>
                                         <asp:LinkButton ID="BuscarUsuario"
                                             runat="server"
@@ -50,51 +48,40 @@
                         <div class="box-body">
                             <asp:UpdatePanel ID="UpdatePanelGridUsuarios" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <asp:GridView ID="GridViewUsuarios" CssClass="table table-bordered" runat="server" DataKeyNames="IdUser" AutoGenerateColumns="false" OnRowCommand="GridView_RowCommand">
+                                    <asp:GridView ID="GridViewUsuarios" CssClass="table table-bordered" runat="server" DataKeyNames="iIdUsuario" AutoGenerateColumns="false" OnRowCommand="GridView_RowCommand">
                                         <Columns>
                                             <asp:TemplateField HeaderText="Usuario">
                                                 <ItemTemplate>
-                                                    <asp:HiddenField ID="idoculto" runat="server" Value='<%# Bind("User.IdUser") %>' />
-                                                    <asp:Label ID="username" runat="server" Text='<%# Bind("User.Username") %>'><%# Eval("User.Username") %> </asp:Label>
+                                                    <asp:HiddenField ID="idoculto" runat="server" Value='<%# Bind("objUsuario.iIdUsuario") %>' />
+                                                    <asp:Label ID="cNombreUsuario" runat="server" Text='<%# Bind("objUsuario.cNombreUsuario") %>'><%# Eval("objUsuario.cNombreUsuario") %> </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Nombre">
                                                 <ItemTemplate>
-                                                    <asp:HiddenField ID="nombre" runat="server" Value='<%# Bind("NombreUser") %>' />
-                                                    <asp:HiddenField ID="ApellidoPat" runat="server" Value='<%# Bind("ApellidoPat") %>' />
-                                                    <asp:HiddenField ID="ApellidoMat" runat="server" Value='<%# Bind("ApellidoMat") %>' />
-                                                    <asp:HiddenField ID="hdversesiones" runat="server" Value='<%# Convert.ToBoolean(Eval("User.Versesiones")) ? "1" :"0" %>' />
-                                                    <asp:Label ID="nombrecompleto" runat="server"><%# Eval("NombreCompleto") %> </asp:Label>
+                                                    <asp:HiddenField ID="cNombre" runat="server" Value='<%# Bind("cNombre") %>' />
+                                                    <asp:HiddenField ID="cApellidoPaterno" runat="server" Value='<%# Bind("cApellidoPaterno") %>' />
+                                                    <asp:HiddenField ID="cApellidoMaterno" runat="server" Value='<%# Bind("cApellidoMaterno") %>' />
+                                                    <asp:Label ID="cNombreCompleto" runat="server"><%# Eval("cNombreCompleto") %> </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Perfil">
                                                 <ItemTemplate>
-                                                    <asp:HiddenField ID="idperfil" runat="server" Value='<%# Bind("User.Perfil.IdPerfil") %>' />
-                                                    <asp:Label runat="server"><%# Eval("User.Perfil.NomPerfil") %> </asp:Label>
+                                                    <asp:HiddenField ID="iIdPerfil" runat="server" Value='<%# Bind("objUsuario.objPerfil.iIdPerfil") %>' />
+                                                    <asp:Label runat="server"><%# Eval("objUsuario.objPerfil.cNombre") %> </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Sede">
-                                                <ItemTemplate>
-                                                    <asp:HiddenField ID="idsede" runat="server" Value='<%# Bind("ObjSedes.idsede") %>' />
-                                                    <asp:Label runat="server"><%# Eval("ObjSedes.descripcion") %> </asp:Label>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Depto.">
-                                                <ItemTemplate>
-                                                    <asp:HiddenField ID="iddepto" runat="server" Value='<%# Bind("ObjDepto.iddepto") %>' />
-                                                    <asp:Label runat="server"><%# Eval("ObjDepto.descripcion") %> </asp:Label>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                           
                                             <asp:TemplateField HeaderText="Puesto">
                                                 <ItemTemplate>
-                                                    <asp:HiddenField ID="idpuesto" runat="server" Value='<%# Bind("ObjPuestos.idpuesto") %>' />
-                                                    <asp:HiddenField ID="idjefe" runat="server" Value='<%# Bind("IdJefe") %>' />
-                                                    <asp:Label runat="server"><%# Eval("ObjPuestos.descripcion") %> </asp:Label>
+                                                    <asp:HiddenField ID="iIdPuesto" runat="server" Value='<%# Bind("objPuesto.iIdPuesto") %>' />
+                                                    <asp:HiddenField ID="iIdCentroCosto" runat="server" Value='<%# Bind("iIdCentroCosto") %>' />
+                                                       <asp:HiddenField ID="iNumeroEmpleado" runat="server" Value='<%# Bind("iNumeroEmpleado") %>' />
+                                                    <asp:Label runat="server"><%# Eval("objPuesto.cNombre") %> </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Alta">
                                                 <ItemTemplate>
-                                                    <asp:Label runat="server"><%# Eval("User.FechaRegistro") %> </asp:Label>
+                                                    <asp:Label runat="server"><%# Eval("objUsuario.dtFechaAlta") %> </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Opciones" ItemStyle-Width="150px">
@@ -210,6 +197,75 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-horizontal">
+                                            
+                                           
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Nombre:</label><div class="col-sm-10">
+                                                    <asp:TextBox ID="txtUserNombre" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <div class="has-error">
+                                                        <asp:Label CssClass="control-label" ID="lblMensajeUserNombre" runat="server" Visible="false" Text="">
+                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
+                                                        </asp:Label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Apellidos:</label><div class="col-sm-5">
+                                                    <asp:TextBox ID="txtUserApellidoPaterno" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <div class="has-error">
+                                                        <asp:Label CssClass="control-label" ID="lblMensajeUserApellidoPaterno" runat="server" Visible="false" Text="">
+                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
+                                                        </asp:Label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <asp:TextBox ID="txtUserApellidoMaterno" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <div class="has-error">
+                                                        <asp:Label CssClass="control-label" ID="lblMensajeUserApellidoMaterno" runat="server" Visible="false" Text="">
+                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
+                                                        </asp:Label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+
+                                                <label class="col-sm-2 control-label">Perfil: </label>
+                                                  <div class="col-sm-5">
+                                                    <asp:DropDownList runat="server" ID="dropUserPerfil" CssClass="form-control"></asp:DropDownList></div>
+                                             <div class="col-sm-3">
+                                                   <label class="control-label">Nro. de Empleado: </label>
+                                                 </div>
+
+                                            <div class="col-sm-2">
+                                                    <asp:TextBox ID="txtNroEmpleado" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <div class="has-error">
+                                                        <asp:Label CssClass="control-label" ID="lblMensajeNroEmpleado" runat="server" Visible="false" Text="">
+                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
+                                                        </asp:Label>
+                                                    </div>
+                                                </div>
+                                              
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Dirección: </label>
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropUserDireccion" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="dropUserDireccion_SelectedIndexChanged"></asp:DropDownList></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Subd: </label>
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropUserSubdireccion"  AutoPostBack="True" OnSelectedIndexChanged="dropUserSubdireccion_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Depto: </label>
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropUserDepartamento" CssClass="form-control"></asp:DropDownList></div>
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="col-sm-2 control-label">Puesto: </label>
+                                                <div class="col-sm-10">
+                                                    <asp:DropDownList runat="server" ID="dropUserPuesto" CssClass="form-control"></asp:DropDownList></div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Email: </label>
                                                 <div class="col-sm-10">
@@ -242,65 +298,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Perfil: </label>
-                                                <div class="col-sm-10">
-                                                    <asp:DropDownList runat="server" ID="dropUserPerfil" CssClass="form-control"></asp:DropDownList></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Nombre:</label><div class="col-sm-10">
-                                                    <asp:TextBox ID="txtUserNombre" CssClass="form-control" runat="server"></asp:TextBox>
-                                                    <div class="has-error">
-                                                        <asp:Label CssClass="control-label" ID="lblMensajeUserNombre" runat="server" Visible="false" Text="">
-                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
-                                                        </asp:Label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Apellidos:</label><div class="col-sm-5">
-                                                    <asp:TextBox ID="txtUserApellidoPaterno" CssClass="form-control" runat="server"></asp:TextBox>
-                                                    <div class="has-error">
-                                                        <asp:Label CssClass="control-label" ID="lblMensajeUserApellidoPaterno" runat="server" Visible="false" Text="">
-                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
-                                                        </asp:Label>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <asp:TextBox ID="txtUserApellidoMaterno" CssClass="form-control" runat="server"></asp:TextBox>
-                                                    <div class="has-error">
-                                                        <asp:Label CssClass="control-label" ID="lblMensajeUserApellidoMaterno" runat="server" Visible="false" Text="">
-                    <i class="fa fa-times-circle-o"></i> Campo Obligatorio
-                                                        </asp:Label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Sede: </label>
-                                                <div class="col-sm-10">
-                                                    <asp:DropDownList runat="server" ID="dropUserSede" CssClass="form-control"></asp:DropDownList></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Dpto: </label>
-                                                <div class="col-sm-10">
-                                                    <asp:DropDownList runat="server" ID="dropUserDepartamento" CssClass="form-control"></asp:DropDownList></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Puesto: </label>
-                                                <div class="col-sm-10">
-                                                    <asp:DropDownList runat="server" ID="dropUserPuesto" CssClass="form-control"></asp:DropDownList></div>
-                                            </div>
-                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label">Jefe: </label>
-                                                <div class="col-sm-10">
-                                                    <asp:DropDownList runat="server" ID="dropUserJefe" CssClass="form-control"></asp:DropDownList></div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Ver todas las sesiones: </label>
-                                                <div class="col-sm-10">
-                                                    <asp:CheckBox ID="chkversesiones" CssClass="" runat="server" /> </div>
-                                            </div>
+                                          
                                             <div class="modal-footer">
                                                 <asp:Button CssClass="btn btn-primary" ID="GuardarUsuario" runat="server" Text="Guardar" OnClick="Nuevo_Click" />
                                                 <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancelar</button>

@@ -20,7 +20,7 @@ public partial class Site : System.Web.UI.MasterPage
         if (!ValidarSesion.sesionactiva())
             Response.Redirect("~/Default.aspx");
 
-        UserMaster = new Usuarios() { Perfil = new Perfiles() };
+        UserMaster = new Usuarios() { objPerfil = new Perfiles() };
         UserMaster = Session["Usuario"] as Usuarios;
 
         MenusBL bl = new MenusBL();
@@ -30,7 +30,7 @@ public partial class Site : System.Web.UI.MasterPage
 
             path = HttpContext.Current.Request.Url.AbsolutePath;
             path = path.Replace("/retros/", "");
-            listMenu = bl.GetMenus(UserMaster.Perfil.IdPerfil);
+            listMenu = bl.GetMenus(UserMaster.objPerfil.iIdPerfil);
             LoadMenu();
 
             List<UsuariosDatos> _lstusuariodatos = new List<UsuariosDatos>();
@@ -39,15 +39,15 @@ public partial class Site : System.Web.UI.MasterPage
             {
                 nombreusuariousermenu.Text = "Soporte";
                 nombredeusuariodropmenu.Text = "Soporte";
-                perfilusuariodropmenu.Text = ((Usuarios)Session["Usuario"]).Perfil.NomPerfil;
+                perfilusuariodropmenu.Text = ((Usuarios)Session["Usuario"]).objPerfil.cNombre;
                 nombreusuarioleftmenu.Text = "Soporte";
             }
             else
             {
-                nombreusuariousermenu.Text = _lstusuariodatos[0].NombreUser;
-                nombredeusuariodropmenu.Text = _lstusuariodatos[0].NombreUser;
-                perfilusuariodropmenu.Text = _lstusuariodatos[0].User.Perfil.NomPerfil;
-                nombreusuarioleftmenu.Text = _lstusuariodatos[0].NombreUser;
+                nombreusuariousermenu.Text = _lstusuariodatos[0].cNombre;
+                nombredeusuariodropmenu.Text = _lstusuariodatos[0].cNombre;
+                perfilusuariodropmenu.Text = _lstusuariodatos[0].objUsuario.objPerfil.cNombre;
+                nombreusuarioleftmenu.Text = _lstusuariodatos[0].cNombre;
             }
 
             lblModalTitlePassword.Text = "Cambio de Contraseña";
@@ -58,7 +58,7 @@ public partial class Site : System.Web.UI.MasterPage
 
     public void ValidarSession()
     {
-        UserMaster = new Usuarios() { Perfil = new Perfiles() };
+        UserMaster = new Usuarios() { objPerfil = new Perfiles() };
         UserMaster = Session["Usuario"] as Usuarios;
         if (UserMaster == null)
         {
@@ -69,7 +69,7 @@ public partial class Site : System.Web.UI.MasterPage
 
     protected void LoadMenu(int idpadre = 0)
     {
-        rptMenus.DataSource = listMenu.Where(x => x.idpadre == idpadre);
+        rptMenus.DataSource = listMenu.Where(x => x.iIdPadre == idpadre);
         rptMenus.DataBind();
     }
     protected void rptMenus_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -80,14 +80,14 @@ public partial class Site : System.Web.UI.MasterPage
             {
                 ESistema.Menu men = new ESistema.Menu();
                 men = e.Item.DataItem as ESistema.Menu;
-                int newpadre = men.Idmenu;
-                string Title = men.nommenu;
+                int newpadre = men.iIdMenu;
+                string Title = men.cNombreMenu;
 
-                List<ESistema.Menu> menu = listMenu.Where(x => x.idpadre == newpadre).ToList();
+                List<ESistema.Menu> menu = listMenu.Where(x => x.iIdPadre == newpadre).ToList();
                 StringBuilder lip = new StringBuilder();
                 string classli = "";
                 string active = "";
-                if (men.urlmenu == path)
+                if (men.cURLMenu == path)
                     active = "active";
 
                 if (menu.Count > 0)
@@ -102,17 +102,17 @@ public partial class Site : System.Web.UI.MasterPage
                     sb.Append("<ul id='" + Title + "' class='treeview-menu'>");
                     foreach (ESistema.Menu item in menu)
                     {
-                        int parentId = item.Idmenu;
-                        string parentTitle = item.nommenu;
-                        List<ESistema.Menu> menuhijo = listMenu.Where(x => x.idpadre == parentId).ToList();
+                        int parentId = item.iIdMenu;
+                        string parentTitle = item.cNombreMenu;
+                        List<ESistema.Menu> menuhijo = listMenu.Where(x => x.iIdPadre == parentId).ToList();
                         if (menuhijo.Count > 0)
                         {
-                            sb.Append("<li><a href='" + ResolveUrl("~/" + item.urlmenu) + "'><i class='" + item.icono + "'></i>" + item.nommenu + "<i class='fa fa-angle-left pull-right'></i></a>");
+                            sb.Append("<li><a href='" + ResolveUrl("~/" + item.cURLMenu) + "'><i class='" + item.cIcono + "'></i>" + item.cNombreMenu + "<i class='fa fa-angle-left pull-right'></i></a>");
 
                         }
                         else
                         {
-                            if (item.urlmenu == path)
+                            if (item.cURLMenu == path)
                             {
                                 active = "active";
                                 lip.Clear();
@@ -122,7 +122,7 @@ public partial class Site : System.Web.UI.MasterPage
                             {
                                 active = "";
                             }
-                            sb.Append("<li class=" + active + "><a href='" + ResolveUrl("~/" + item.urlmenu) + "'><i class='" + item.icono + "'></i>" + item.nommenu + " </a>");
+                            sb.Append("<li class=" + active + "><a href='" + ResolveUrl("~/" + item.cURLMenu) + "'><i class='" + item.cIcono + "'></i>" + item.cNombreMenu + " </a>");
 
                         }
 
@@ -148,22 +148,22 @@ public partial class Site : System.Web.UI.MasterPage
             sb.Append("<ul id='" + parentTitle + "' class='treeview-menu'>");
             foreach (var item in parentRows)
             {
-                int childId = item.Idmenu;
-                string childTitle = item.nommenu;
-                List<ESistema.Menu> childRow = listMenu.Where(x => x.idpadre == childId).ToList();
+                int childId = item.iIdMenu;
+                string childTitle = item.cNombreMenu;
+                List<ESistema.Menu> childRow = listMenu.Where(x => x.iIdPadre == childId).ToList();
                 string active = "";
-                if (item.urlmenu == path)
+                if (item.cURLMenu == path)
                     active = "active";
                 else
                     active = "";
                 if (childRow.Count > 0)
                 {
-                    sb.Append("<li><a  href='" + ResolveUrl("~/" + item.urlmenu) + "'><i class='" + item.icono + "'></i>" + item.nommenu + "<i class='fa fa-angle-left pull-right'></i></a>");
+                    sb.Append("<li><a  href='" + ResolveUrl("~/" + item.cURLMenu) + "'><i class='" + item.cIcono + "'></i>" + item.cNombreMenu + "<i class='fa fa-angle-left pull-right'></i></a>");
 
                 }
                 else
                 {
-                    sb.Append("<li class=" + active + "><a href='" + ResolveUrl("~/" + item.urlmenu) + "'><i class='" + item.icono + "'></i>" + item.nommenu + " </a>");
+                    sb.Append("<li class=" + active + "><a href='" + ResolveUrl("~/" + item.cURLMenu) + "'><i class='" + item.cIcono + "'></i>" + item.cNombreMenu + " </a>");
                 }
                 CreateChild(sb, childId, childTitle, childRow);
                 sb.Append("</li>");
@@ -184,9 +184,9 @@ public partial class Site : System.Web.UI.MasterPage
             {
                 UsuariosBL _catusuariosneg = new UsuariosBL();
                 UsuariosDatos _catusuario = new UsuariosDatos();
-                _catusuario.User = new Usuarios();
-                _catusuario.User.IdUser = Convert.ToInt32(Session["IdUser"]);
-                _catusuario.User.Password = txtUserPasswordCambio.Text;
+                _catusuario.objUsuario = new Usuarios();
+                _catusuario.objUsuario.iIdUsuario = Convert.ToInt32(Session["IdUser"]);
+                _catusuario.objUsuario.cPassword = txtUserPasswordCambio.Text;
                 _catusuariosneg.cambiarPassword(_catusuario);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "ModalPassword", "$('#ModalPassword').modal('hide');", true);
                 upModalPassword.Update();

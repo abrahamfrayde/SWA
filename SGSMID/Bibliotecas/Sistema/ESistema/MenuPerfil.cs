@@ -8,11 +8,11 @@ namespace ESistema
 {
     public class MenuPerfil
     {
-        public int idmenuperfil { get; set; }
+        public int iIdMenuPerfil { get; set; }
         public Menu objMenu { get; set; }
         public Perfiles objPerfil { get; set; }
-        public int idusuario { get; set; }
-        public DateTime fecharegistro { get; set; }
+        public int iIdUsuarioGestion { get; set; }
+        public DateTime dtFechaRegistro { get; set; }
         public MenuPerfil() { }
     }
 }

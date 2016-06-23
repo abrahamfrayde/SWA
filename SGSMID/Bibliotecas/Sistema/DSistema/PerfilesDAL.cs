@@ -24,19 +24,21 @@ namespace DSistema
             int id = 0;
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_perfiles_ins", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_PERFILES_INS", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@nombreperfil", _objperfil.NomPerfil);
-                    command.Parameters.AddWithValue("@usergestiono", _objperfil.IdUsuario);
+                    command.Parameters.AddWithValue("@cNombre", _objperfil.cNombre);
+                    command.Parameters.AddWithValue("@cDescripcion", _objperfil.cDescripcion);
+                    command.Parameters.AddWithValue("@iIdCentroCosto", _objperfil.iIdCentroCosto);
+                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _objperfil.iIdUsuarioGestion);
                     cn.OpenConnection();
                     id = (int)command.ExecuteScalar();
                     Perfiles _objperfiltemp = new Perfiles();
                     _objperfiltemp = _objperfil;
-                    _objperfiltemp.IdPerfil = id;
+                    _objperfiltemp.iIdPerfil = id;
                     MenuPerfilDAL _objmenuperfil = new MenuPerfilDAL();
 
-                    foreach (ESistema.Menu _objmenu in _lstmenu.GroupBy(i=>i.Idmenu).Select(g=>g.First()).ToList())
+                    foreach (ESistema.Menu _objmenu in _lstmenu.GroupBy(i=>i.iIdMenu).Select(g=>g.First()).ToList())
                     {
 
                         _objmenuperfil.insertarMenuPerfil(_objperfiltemp, _objmenu);
@@ -68,11 +70,13 @@ namespace DSistema
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_perfiles_upd", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_PERFILES_UPD", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idperfil", _objperfil.IdPerfil);
-                    command.Parameters.AddWithValue("@nombreperfil", _objperfil.NomPerfil);
+                    command.Parameters.AddWithValue("@iIdPerfil", _objperfil.iIdPerfil);
+                    command.Parameters.AddWithValue("@cDescripcion", _objperfil.cDescripcion);
+                    command.Parameters.AddWithValue("@iIdCentroCosto", _objperfil.iIdCentroCosto);
+                    command.Parameters.AddWithValue("@cNombre", _objperfil.cNombre);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();      
                 }
@@ -96,10 +100,10 @@ namespace DSistema
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_perfiles_del", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_PERFILES_DEL", cn.Connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idperfil", _objperfil.IdPerfil);
+                    command.Parameters.AddWithValue("@iIdPerfil", _objperfil.iIdPerfil);
                     cn.OpenConnection();
                     command.ExecuteNonQuery();
                 }
@@ -123,10 +127,10 @@ namespace DSistema
             Perfiles cat;
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_perfiles_get", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_PERFILES_GET", cn.Connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@id", id == 0 ? (object)DBNull.Value : id);
+                    command.Parameters.AddWithValue("@iIdPerfil", id == 0 ? (object)DBNull.Value : id);
                     command.Parameters.AddWithValue("@filtro", string.IsNullOrEmpty(filtro) ? (object)DBNull.Value : filtro);
                     cn.OpenConnection();
                     SqlDataReader reader = command.ExecuteReader();
@@ -134,9 +138,18 @@ namespace DSistema
                     while (reader.Read())
                     {
                         cat = new Perfiles();
-                        cat.IdPerfil = (int)reader["idperfil"];
-                        cat.NomPerfil = (string)reader["nomperfil"];
-                        cat.FechaRegistro = (DateTime)reader["fecharegistro"];
+                        cat.iIdPerfil = (int)reader["iIdPerfil"];
+                        cat.cNombre = (string)reader["cNombre"];
+                        cat.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
+                        if(reader["cDescripcion"] == DBNull.Value)
+                        {
+                            
+                        }
+                        else
+                        {
+                            cat.cDescripcion = (string)reader["cDescripcion"];
+                        }
+                        cat.iIdCentroCosto = (int)reader["iIdCentroCosto"];
                         list.Add(cat);
                     }
                 }
@@ -162,19 +175,19 @@ namespace DSistema
             Menu obj;
             try
             {
-                using (SqlCommand command = new SqlCommand("spd_menu_get", cn.Connection))
+                using (SqlCommand command = new SqlCommand("SPD_MENU_GET", cn.Connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idmenu", id == 0 ? (object)DBNull.Value : id);
+                    command.Parameters.AddWithValue("@iIdMenu", id == 0 ? (object)DBNull.Value : id);
                     cn.OpenConnection();
                     SqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
                         obj = new Menu();
-                        obj.Idmenu = (int)reader["idmenu"];
-                        obj.nommenu = "&nbsp;&nbsp;<i class='" + (string) reader["icono"] + "'></i>&nbsp;&nbsp;" + (string)reader["nombre"];
-                        obj.idpadre = (int)reader["idpadre"];
+                        obj.iIdMenu = (int)reader["iIdMenu"];
+                        obj.cNombreMenu = "&nbsp;&nbsp;<i class='" + (string) reader["cIcono"] + "'></i>&nbsp;&nbsp;" + (string)reader["cNombre"];
+                        obj.iIdPadre = (int)reader["iIdPadre"];
                   
                         list.Add(obj);
                     }

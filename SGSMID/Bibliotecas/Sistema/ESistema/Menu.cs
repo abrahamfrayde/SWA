@@ -8,14 +8,14 @@ namespace ESistema
 {
     public class Menu
     {
-        public int Idmenu { get; set; }
-        public string nommenu { get; set; }
-        public string urlmenu { get; set; }
-        public int orden { get; set; }
-        public int idpadre { get; set; }
-        public DateTime fecharegistro { get; set; }
-        public Boolean activo { get; set; }
-        public string icono { get; set; }
+        public int iIdMenu { get; set; }
+        public string cNombreMenu { get; set; }
+        public string cURLMenu { get; set; }
+        public int iOrden { get; set; }
+        public int iIdPadre { get; set; }
+        public DateTime dtFechaRegistro { get; set; }
+        public Boolean bActivo { get; set; }
+        public string cIcono { get; set; }
         public Menu() { }
     }
 }
