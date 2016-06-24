@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESistema.Catalogos
 {
-    class CatProcesos
+    public class CatProcesos
     {
     }
 }
