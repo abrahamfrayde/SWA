@@ -201,7 +201,7 @@ namespace DSistema
                         // Creamos la instancia de _CatRamas en donde se pondrán los datos del registro
                         _CatRamas = new CatRamas();
                         // Definimos y creamos los objetos asociados a esta entidad _CatRamas en donde se depositarán los valores del registro correspondiente a estos objetos
-                        _CatRamas.ObjCentroCostos = new CentroCostos();
+                        _CatRamas.ObjCentroCostos = new CentrosCostos();
                         _CatRamas.ObjUsuarioGestion = new Usuarios();
 
                         // Asignamos los valores del registro al objeto _CatRamas

@@ -8,5 +8,6 @@ namespace ESistema.Catalogos
 {
     public class CatProcesos
     {
+        public int iIdProceso { get; set; }
     }
 }
