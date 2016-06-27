@@ -103,7 +103,7 @@ namespace DSistema
             // Devuelve el id del registro modificado
             return id;
         }
-        public int EliminarProceso(CatStatus _catStatus)
+        public int EliminarStatus(CatStatus _catStatus)
         {
             // Define e inicializa la variable id en donde recibira el valor devuelto por el procedimiento almacenado, que es el id del registro modificado
             // Esto debido a que el procedimiento eliminar únicamente modifica el valor bActivo de la tabla, por lo cual es finalmente un proceso de modificación
