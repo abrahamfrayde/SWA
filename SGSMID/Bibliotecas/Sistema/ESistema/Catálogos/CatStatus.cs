@@ -16,5 +16,7 @@ namespace ESistema.Catalogos
         public DateTime dtFechaRegistro { get; set; }
         public Boolean bActivo { get; set; }
 
+        public CatStatus() { }
+        
     }
 }
