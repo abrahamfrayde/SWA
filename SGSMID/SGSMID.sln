@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentación", "Documentación", "{0D0B975C-651F-4012-93CF-F1AA0727BD94}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagramas", "Diagramas", "{3BD01DDB-FA01-4832-9CD2-549D1936E091}"
+	ProjectSection(SolutionItems) = preProject
+		Documentacion\Diagramas\Diagramas UML - SGS MID - Versión 1.vsdx = Documentacion\Diagramas\Diagramas UML - SGS MID - Versión 1.vsdx
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modulos", "Modulos", "{359C96BE-35D3-4497-BE24-1F776777AA47}"
 EndProject
