@@ -14,7 +14,7 @@ namespace ESistema.Catalogos
         // Propiedades de la clase CatRamas
         public int iIdRama { get; set; }
         public string cNombre { get; set; }
-        public CentrosCostos ObjCentroCostos { get; set; }
+        public CentrosCostos ObjCentrosCostos { get; set; }
         public Usuarios ObjUsuarioGestion { get; set; }
         public DateTime dtFechaRegistro { get; set; }
         public Boolean bActivo { get; set; }

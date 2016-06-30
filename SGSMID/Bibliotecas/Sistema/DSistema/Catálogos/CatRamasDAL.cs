@@ -40,7 +40,7 @@ namespace DSistema
 
                     // Establece los valores que recibirá el procedimiento almacenado
                     command.Parameters.AddWithValue("@cNombre", _CatRamas.cNombre);
-                    command.Parameters.AddWithValue("@iIdCentroCosto", _CatRamas.ObjCentroCostos.iIdCentroCosto);
+                    command.Parameters.AddWithValue("@iIdCentroCosto", _CatRamas.ObjCentrosCostos.iIdCentroCosto);
                     command.Parameters.AddWithValue("@iIdUsuarioGestion", _CatRamas.ObjUsuarioGestion.iIdUsuario);
 
                     // Abre la conexión a la BD
@@ -87,7 +87,7 @@ namespace DSistema
                     // Establece los valores que recibirá el procedimiento almacenado
                     command.Parameters.AddWithValue("@iIdRama", _CatRamas.iIdRama);
                     command.Parameters.AddWithValue("@cNombre", _CatRamas.cNombre);
-                    command.Parameters.AddWithValue("@iIdCentroCosto", _CatRamas.ObjCentroCostos.iIdCentroCosto);
+                    command.Parameters.AddWithValue("@iIdCentroCosto", _CatRamas.ObjCentrosCostos.iIdCentroCosto);
                     command.Parameters.AddWithValue("@iIdUsuarioGestion", _CatRamas.ObjUsuarioGestion.iIdUsuario);
 
                     // Abre la conexión a la BD
@@ -201,13 +201,13 @@ namespace DSistema
                         // Creamos la instancia de _CatRamas en donde se pondrán los datos del registro
                         _CatRamas = new CatRamas();
                         // Definimos y creamos los objetos asociados a esta entidad _CatRamas en donde se depositarán los valores del registro correspondiente a estos objetos
-                        _CatRamas.ObjCentroCostos = new CentrosCostos();
+                        _CatRamas.ObjCentrosCostos = new CentrosCostos();
                         _CatRamas.ObjUsuarioGestion = new Usuarios();
 
                         // Asignamos los valores del registro al objeto _CatRamas
                         _CatRamas.iIdRama = (int)reader["iIdRama"];
                         _CatRamas.cNombre = (string)reader["cNombre"];
-                        _CatRamas.ObjCentroCostos.iIdCentroCosto = (int)reader["iIdCentroCosto"];
+                        _CatRamas.ObjCentrosCostos.iIdCentroCosto = (int)reader["iIdCentroCosto"];
                         _CatRamas.ObjUsuarioGestion.iIdUsuario = (int)reader["iIdUsuario"];
                         _CatRamas.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
                         _CatRamas.bActivo = Convert.ToBoolean(reader["bActivo"]);
