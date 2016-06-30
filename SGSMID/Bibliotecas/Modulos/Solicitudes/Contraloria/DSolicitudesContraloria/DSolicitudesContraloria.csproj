@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AE752BAE-0991-4560-87CC-DE60E299BCB6}</ProjectGuid>
+    <ProjectGuid>{66B5A67E-1A8B-4B5E-9C16-F5B425040A75}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ESolicitudes</RootNamespace>
-    <AssemblyName>ESolicitudes</AssemblyName>
+    <RootNamespace>DSolicitudesContraloria</RootNamespace>
+    <AssemblyName>DSolicitudesContraloria</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

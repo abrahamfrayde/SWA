@@ -40,17 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeneficiariosDAL.cs" />
     <Compile Include="Catálogos\CatPeriodosDAL.cs" />
     <Compile Include="Catálogos\CatProcesosDAL.cs" />
     <Compile Include="Catálogos\CatPuestosDAL.cs" />
     <Compile Include="Catálogos\CatRamasDAL.cs" />
     <Compile Include="Catálogos\CatStatusDAL.cs" />
+    <Compile Include="Catálogos\CatStatusOrdenDAL.cs" />
     <Compile Include="Catálogos\CatTiposSolicitudDAL.cs" />
     <Compile Include="CentrosCostosDAL.cs" />
     <Compile Include="MenuDAL.cs" />
     <Compile Include="MenuPerfilDAL.cs" />
     <Compile Include="PerfilesDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolicitudesDAL.cs" />
     <Compile Include="UsuariosDAL.cs" />
   </ItemGroup>
   <ItemGroup>

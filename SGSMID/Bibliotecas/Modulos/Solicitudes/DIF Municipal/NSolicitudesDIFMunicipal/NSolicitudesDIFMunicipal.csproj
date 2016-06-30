@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{098F1E96-93BB-4496-960B-535BADC62485}</ProjectGuid>
+    <ProjectGuid>{D3D956F3-31BD-4E6C-9D3D-186736578B7D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NSolicitudes</RootNamespace>
-    <AssemblyName>NSolicitudes</AssemblyName>
+    <RootNamespace>NSolicitudesDIFMunicipal</RootNamespace>
+    <AssemblyName>NSolicitudesDIFMunicipal</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,16 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DSolicitudes\DSolicitudes.csproj">
-      <Project>{ab012b8c-1cd9-49ea-9a80-8afaaafe1aaf}</Project>
-      <Name>DSolicitudes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ESolicitudes\ESolicitudes.csproj">
-      <Project>{ae752bae-0991-4560-87cc-de60e299bcb6}</Project>
-      <Name>ESolicitudes</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
