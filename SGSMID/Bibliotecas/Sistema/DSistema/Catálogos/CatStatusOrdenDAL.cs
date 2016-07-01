@@ -9,7 +9,7 @@ using ESistema.Catalogos;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace DSistema.Catalogos
+namespace DSistema
 {
     class CatStatusOrdenDAL
     {
