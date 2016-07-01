@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace DSistema
 {
-    class CatStatusOrdenDAL
+    public class CatStatusOrdenDAL
     {
         private Conexion.Conexion cn;
 
