@@ -9,7 +9,7 @@ using ESistema;
 using ESistema.Catalogos;
 
 
-namespace NSistema.Catálogos
+namespace NSistema
 {
     public class CatProcesosBL
     {
