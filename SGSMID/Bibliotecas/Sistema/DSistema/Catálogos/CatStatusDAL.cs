@@ -118,7 +118,7 @@ namespace DSistema
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
                     // Establece los valores que recibirá el procedimiento almacenado
-                    command.Parameters.AddWithValue("@iIdRama", _catStatus.iIdStatus);
+                    command.Parameters.AddWithValue("@iIdStatus", _catStatus.iIdStatus);
 
                     // Abre la conexión a la BD
                     cn.OpenConnection();
