@@ -208,7 +208,7 @@ namespace DSistema
                         _CatRamas.iIdRama = (int)reader["iIdRama"];
                         _CatRamas.cNombre = (string)reader["cNombre"];
                         _CatRamas.ObjCentrosCostos.iIdCentroCosto = (int)reader["iIdCentroCosto"];
-                        _CatRamas.ObjUsuarioGestion.iIdUsuario = (int)reader["iIdUsuario"];
+                        _CatRamas.ObjUsuarioGestion.iIdUsuario = (int)reader["iIdUsuarioGestion"];
                         _CatRamas.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
                         _CatRamas.bActivo = Convert.ToBoolean(reader["bActivo"]);
 
