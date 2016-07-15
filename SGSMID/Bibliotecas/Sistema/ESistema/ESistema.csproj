@@ -49,6 +49,7 @@
     <Compile Include="Catálogos\CatStatusOrden.cs" />
     <Compile Include="Catálogos\CatTiposSolicitud.cs" />
     <Compile Include="CentrosCostos.cs" />
+    <Compile Include="Geo\JsonWebService.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuPerfil.cs" />
     <Compile Include="Perfiles.cs" />

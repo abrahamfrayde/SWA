@@ -49,6 +49,7 @@
     <Compile Include="Catálogos\CatStatusOrdenBL.cs" />
     <Compile Include="Catálogos\CatTiposSolicitudBL.cs" />
     <Compile Include="CentrosCostosBL.cs" />
+    <Compile Include="GeoBL.cs" />
     <Compile Include="MenuPerfilBL.cs" />
     <Compile Include="MenusBL.cs" />
     <Compile Include="PerfilesBL.cs" />

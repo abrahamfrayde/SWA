@@ -38,5 +38,6 @@
         routes.MapPageRoute("SolicitudesAltaBenefApp", "solicitudes/altabeneficiario", "~/Solicitudes/AltaBeneficiario.aspx");
         routes.MapPageRoute("PerfilesApp", "admin/perfiles", "~/Administracion/Perfiles.aspx");
         routes.MapPageRoute("VistaSesionApp", "minutas/detalles/{idsesion}", "~/Minutas/VistaSesion.aspx");
+        routes.MapPageRoute("PruebaGeoApp", "demos/pruebageo", "~/Demos/PruebaGeo.aspx");
     }
 </script>
