@@ -13,6 +13,7 @@ namespace ESistema
         
         public string cDescripcion { get; set; }
         public int iIdCentroCosto { get; set; }
+        public string cNombreDepartamento { get; set; } 
         public int iIdUsuarioGestion { get; set; }
         public DateTime dtFechaRegistro { get; set; }
         public bool bActivo { get; set; }

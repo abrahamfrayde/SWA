@@ -125,6 +125,9 @@ namespace DSistema
         {
             List<Perfiles> list = new List<Perfiles>();
             Perfiles cat;
+            CentrosCostosDAL _centrocostosdal = new CentrosCostosDAL();
+            List<CentrosCostos> _lstcentroscostos = new List<CentrosCostos>();
+           
             try
             {
                 using (SqlCommand command = new SqlCommand("SPD_PERFILES_GET", cn.Connection))
@@ -138,6 +141,7 @@ namespace DSistema
                     while (reader.Read())
                     {
                         cat = new Perfiles();
+                        
                         cat.iIdPerfil = (int)reader["iIdPerfil"];
                         cat.cNombre = (string)reader["cNombre"];
                         cat.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
@@ -150,6 +154,8 @@ namespace DSistema
                             cat.cDescripcion = (string)reader["cDescripcion"];
                         }
                         cat.iIdCentroCosto = (int)reader["iIdCentroCosto"];
+                        _lstcentroscostos = _centrocostosdal.obtenerCentrosCostos(cat.iIdCentroCosto);
+                        cat.cNombreDepartamento = _lstcentroscostos[0].cNombre;
                         list.Add(cat);
                     }
                 }

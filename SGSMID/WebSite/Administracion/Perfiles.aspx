@@ -64,7 +64,20 @@
                                                     <asp:Label runat="server"><%# Eval("dtFechaRegistro") %> </asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Opciones" ItemStyle-Width="302px">
+                                             <asp:TemplateField HeaderText="Descripción">
+                                                 <ItemTemplate>
+                                                       <asp:Label ID="Descripcion" runat="server" Text='<%# Bind("cDescripcion") %>'><%# Eval("cDescripcion") %> </asp:Label>
+                                               
+                                                </ItemTemplate>
+                                                 </asp:TemplateField>
+                                               <asp:TemplateField HeaderText="Departamento">
+                                                    <ItemTemplate>
+                                                       <asp:Label ID="Departamento" runat="server" Text='<%# Bind("cNombreDepartamento") %>'><%# Eval("cNombreDepartamento") %> </asp:Label>
+                                               
+                                                </ItemTemplate>
+                                                 </asp:TemplateField>
+
+                                            <asp:TemplateField HeaderText="Opciones" ItemStyle-Width="150px">
                                                 <ItemTemplate>
 
                                                     <asp:LinkButton ID="btnCambiarNombrePerfil"
@@ -72,21 +85,21 @@
                                                         CssClass="btn btn-primary btn-sm"
                                                         CommandName="CambiarNombrePerfil"
                                                         CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">
-  &nbsp; <span aria-hidden="true" class="fa fa-pencil"></span>&nbsp;&nbsp;Editar  
+  &nbsp; <span aria-hidden="true" class="fa fa-pencil"></span>&nbsp;&nbsp;  
                                                     </asp:LinkButton>
                                                     <asp:LinkButton ID="btnEditarPermisos"
                                                         runat="server"
                                                         CssClass="btn btn-warning btn-sm"
                                                         CommandName="EditarPermisos"
                                                         CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">
-  &nbsp;  <span aria-hidden="true" class="fa fa-list"></span>&nbsp;&nbsp;Editar Permisos
+  &nbsp;  <span aria-hidden="true" class="fa fa-list"></span>&nbsp;&nbsp;
                                                     </asp:LinkButton>
                                                     <asp:LinkButton ID="btnEliminarPerfil"
                                                         runat="server"
                                                         CssClass="btn btn-danger btn-sm"
                                                         CommandName="EliminarPerfil"
                                                         CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">
-  &nbsp;  <span aria-hidden="true" class="fa fa-trash"></span>&nbsp;&nbsp;Eliminar
+  &nbsp;  <span aria-hidden="true" class="fa fa-trash"></span>&nbsp;&nbsp;
                                                     </asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
