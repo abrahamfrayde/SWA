@@ -187,7 +187,7 @@
                 <!-- Bootstrap Modal Dialog OperUsuario -->
                 <div class="modal fade" id="ModalOperUsuario" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
-                        <asp:UpdatePanel ID="upModalOperUsuario" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                        <asp:UpdatePanel ID="upModalOperUsuario" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -298,13 +298,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                          
+                                          </div>
+                                        </div>
                                             <div class="modal-footer">
                                                 <asp:Button CssClass="btn btn-primary" ID="GuardarUsuario" runat="server" Text="Guardar" OnClick="Nuevo_Click" />
                                                 <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancelar</button>
                                             </div>
                                         </div>
+                                        
                             </ContentTemplate>
+                             <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="dropUserDireccion" EventName="selectedindexchanged" />
+                                    <asp:AsyncPostBackTrigger ControlID="dropUserSubdireccion" EventName="selectedindexchanged" />
+                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
                 </div>

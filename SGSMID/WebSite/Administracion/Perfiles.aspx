@@ -256,6 +256,10 @@
                                             </div>
                                         </div>
                             </ContentTemplate>
+                            <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="dropUserDireccion" EventName="selectedindexchanged" />
+                                    <asp:AsyncPostBackTrigger ControlID="dropUserSubdireccion" EventName="selectedindexchanged" />
+                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
                 </div>

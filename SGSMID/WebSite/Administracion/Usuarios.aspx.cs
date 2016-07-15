@@ -33,6 +33,7 @@ public partial class Administracion_Usuarios : System.Web.UI.Page
             txtNombreCompletoEmail.Attributes.Add("placeholder", "Nombre o Correo Electronico");
             GridViewUsuarios.DataSource = _catusuariosneg.list();
             GridViewUsuarios.DataBind();
+           
         }
     }
     public void LoadComboPuesto(string oper = null, int ID = 0)
@@ -75,64 +76,68 @@ public partial class Administracion_Usuarios : System.Web.UI.Page
     }
     public void LoadComboCentrosCostos(string oper = null, int ID = 0)
     {
-        if(oper == null)
-        {
-            dropUserDireccion.DataSource = _catcentroscostosneg.list(0, 0, 1);
-            dropUserDireccion.DataValueField = "iIdCentroCosto";
-            dropUserDireccion.DataTextField = "cNombre";
-            dropUserDireccion.DataBind();
-            dropUserSubdireccion.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserDireccion.SelectedValue.ToString()), 2);
-            dropUserSubdireccion.DataValueField = "iIdCentroCosto";
-            dropUserSubdireccion.DataTextField = "cNombre";
-            dropUserSubdireccion.DataBind();
-            dropUserDepartamento.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserSubdireccion.SelectedValue.ToString()), 3);
-            dropUserDepartamento.DataValueField = "iIdCentroCosto";
-            dropUserDepartamento.DataTextField = "cNombre";
-            dropUserDepartamento.DataBind();
-        }
-        if(oper == "Seleccion")
-        {
-            dropUserDepartamento.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserSubdireccion.SelectedValue.ToString()), 3);
-            dropUserDepartamento.DataValueField = "iIdCentroCosto";
-            dropUserDepartamento.DataTextField = "cNombre";
-            dropUserDepartamento.DataBind();
-        }
-        if (oper == "Direccion")
-        {
-            dropUserSubdireccion.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserDireccion.SelectedValue.ToString()), 2);
-            dropUserSubdireccion.DataValueField = "iIdCentroCosto";
-            dropUserSubdireccion.DataTextField = "cNombre";
-            dropUserSubdireccion.DataBind();
-            dropUserDepartamento.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserSubdireccion.SelectedValue.ToString()), 3);
-            dropUserDepartamento.DataValueField = "iIdCentroCosto";
-            dropUserDepartamento.DataTextField = "cNombre";
-            dropUserDepartamento.DataBind();
-        }
-        if (oper == "Cargar Guardado")
-        {
-            List<CentrosCostos> _lstdepartamento = new List<CentrosCostos>();
-            _lstdepartamento = _catcentroscostosneg.list(ID, 0, 3);
-            List<CentrosCostos> _lstsubdireccion = new List<CentrosCostos>();
-            _lstsubdireccion = _catcentroscostosneg.list(_lstdepartamento[0].iIdParent, 0, 2);
-            List<CentrosCostos> _lstdireccion = new List<CentrosCostos>();
-            _lstdireccion = _catcentroscostosneg.list(_lstsubdireccion[0].iIdParent, 0, 1);
+       
+            if (oper == null)
+            {
+                dropUserDireccion.DataSource = _catcentroscostosneg.list(0, 0, 1);
+                dropUserDireccion.DataValueField = "iIdCentroCosto";
+                dropUserDireccion.DataTextField = "cNombre";
+                dropUserDireccion.DataBind();
+                dropUserSubdireccion.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserDireccion.SelectedValue.ToString()), 2);
+                dropUserSubdireccion.DataValueField = "iIdCentroCosto";
+                dropUserSubdireccion.DataTextField = "cNombre";
+                dropUserSubdireccion.DataBind();
+                dropUserDepartamento.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserSubdireccion.SelectedValue.ToString()), 3);
+                dropUserDepartamento.DataValueField = "iIdCentroCosto";
+                dropUserDepartamento.DataTextField = "cNombre";
+                dropUserDepartamento.DataBind();
+            }
+            if (oper == "Seleccion")
+            {
+                dropUserDepartamento.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserSubdireccion.SelectedValue.ToString()), 3);
+                dropUserDepartamento.DataValueField = "iIdCentroCosto";
+                dropUserDepartamento.DataTextField = "cNombre";
+                dropUserDepartamento.DataBind();
+            }
+            if (oper == "Direccion")
+            {
+                dropUserSubdireccion.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserDireccion.SelectedValue.ToString()), 2);
+                dropUserSubdireccion.DataValueField = "iIdCentroCosto";
+                dropUserSubdireccion.DataTextField = "cNombre";
+                dropUserSubdireccion.DataBind();
+                dropUserDepartamento.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserSubdireccion.SelectedValue.ToString()), 3);
+                dropUserDepartamento.DataValueField = "iIdCentroCosto";
+                dropUserDepartamento.DataTextField = "cNombre";
+                dropUserDepartamento.DataBind();
+            }
+            if (oper == "Cargar Guardado")
+            {
+                List<CentrosCostos> _lstdepartamento = new List<CentrosCostos>();
+                _lstdepartamento = _catcentroscostosneg.list(ID, 0, 3);
+                List<CentrosCostos> _lstsubdireccion = new List<CentrosCostos>();
+                _lstsubdireccion = _catcentroscostosneg.list(_lstdepartamento[0].iIdParent, 0, 2);
+                List<CentrosCostos> _lstdireccion = new List<CentrosCostos>();
+                _lstdireccion = _catcentroscostosneg.list(_lstsubdireccion[0].iIdParent, 0, 1);
 
-            dropUserDireccion.DataSource = _catcentroscostosneg.list(0, 0, 1);
-            dropUserDireccion.DataValueField = "iIdCentroCosto";
-            dropUserDireccion.DataTextField = "cNombre";
-            dropUserDireccion.DataBind();
-            dropUserDireccion.Items.FindByValue(_lstdireccion[0].iIdCentroCosto.ToString()).Selected = true;
-            dropUserSubdireccion.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserDireccion.SelectedValue.ToString()), 2);
-            dropUserSubdireccion.DataValueField = "iIdCentroCosto";
-            dropUserSubdireccion.DataTextField = "cNombre";
-            dropUserSubdireccion.DataBind();
-            dropUserSubdireccion.Items.FindByValue(_lstsubdireccion[0].iIdCentroCosto.ToString()).Selected = true;
-            dropUserDepartamento.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserSubdireccion.SelectedValue.ToString()), 3);
-            dropUserDepartamento.DataValueField = "iIdCentroCosto";
-            dropUserDepartamento.DataTextField = "cNombre";
-            dropUserDepartamento.DataBind();
-            dropUserDepartamento.Items.FindByValue(ID.ToString()).Selected = true;
-        }
+                dropUserDireccion.DataSource = _catcentroscostosneg.list(0, 0, 1);
+                dropUserDireccion.DataValueField = "iIdCentroCosto";
+                dropUserDireccion.DataTextField = "cNombre";
+                dropUserDireccion.DataBind();
+                dropUserDireccion.Items.FindByValue(_lstdireccion[0].iIdCentroCosto.ToString()).Selected = true;
+                dropUserSubdireccion.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserDireccion.SelectedValue.ToString()), 2);
+                dropUserSubdireccion.DataValueField = "iIdCentroCosto";
+                dropUserSubdireccion.DataTextField = "cNombre";
+                dropUserSubdireccion.DataBind();
+                dropUserSubdireccion.Items.FindByValue(_lstsubdireccion[0].iIdCentroCosto.ToString()).Selected = true;
+                dropUserDepartamento.DataSource = _catcentroscostosneg.list(0, Convert.ToInt32(dropUserSubdireccion.SelectedValue.ToString()), 3);
+                dropUserDepartamento.DataValueField = "iIdCentroCosto";
+                dropUserDepartamento.DataTextField = "cNombre";
+                dropUserDepartamento.DataBind();
+                dropUserDepartamento.Items.FindByValue(ID.ToString()).Selected = true;
+            }
+
+   
+          
     }
     protected void GridView_RowCommand(object sender, GridViewCommandEventArgs e)
     {
