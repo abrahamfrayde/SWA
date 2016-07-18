@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Conexion;
 using ESistema;
-using ESistema.Catalogos;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -25,7 +24,7 @@ namespace DSistema
 
         // Método para insertar un Tipo de Solicitud en la tabla tbl_cat_tipossolicitud, utilizando el procedimiento almacenado SPD_CAT_TIPOSSOLICITUD_INS
         // Recibe el objeto _CatTiposSolicitud con los datos a insertar y una vez insertado devuelve el id del registro insertado
-        public int InsertarTiposSolicitud (CatTiposSolicitud _CatTiposSolicitud)
+        public int InsertarTiposSolicitud(CatTiposSolicitud _CatTiposSolicitud)
         {
             // Define e inicializa la variable id en donde recibira el valor devuelto por el procedimiento almacenado, que es el id del registro insertado
             int id = 0;
@@ -43,8 +42,6 @@ namespace DSistema
                     command.Parameters.AddWithValue("@iIdRama", _CatTiposSolicitud.ObjRamas.iIdRama);
                     command.Parameters.AddWithValue("@iIdProceso", _CatTiposSolicitud.ObjProcesos.iIdProceso);
                     command.Parameters.AddWithValue("@iIdUsuarioGestion", _CatTiposSolicitud.ObjUsuarioGestion.iIdUsuario);
-                    command.Parameters.AddWithValue("@dtFechaRegistro", _CatTiposSolicitud.dtFechaRegistro);
-                    command.Parameters.AddWithValue("@bActivo", _CatTiposSolicitud.bActivo);
 
                     // Abre la conexión a la BD
                     cn.OpenConnection();
@@ -169,7 +166,7 @@ namespace DSistema
         // Recibe el filtro para el nombre de el o los Tipos de Solicitudes a obtener que cumplan con este filtro, este parámetro no es requerido
         // El resultado de la consulta a obtener dependera de los parámetros enviados en caso que no se envíe ninguno se obtiene toda la tabla
         // Los resultados son devueltos en una lista de objetos de tipo CatTiposSolicitud
-        public List<CatTiposSolicitud> ObtenerTiposSolicitud(int id=0, string filtro = null)
+        public List<CatTiposSolicitud> ObtenerTiposSolicitud(int id = 0, string filtro = null)
         {
             // Define e incializa la variable tipo que indica al procedimiento a que tabla hace referencia
             string tipo = "tipossolicitud";
@@ -212,7 +209,9 @@ namespace DSistema
                         _CatTiposSolicitud.iIdTipoSolicitud = (int)reader["iIdTipoSolicitud"];
                         _CatTiposSolicitud.cNombre = (string)reader["cNombre"];
                         _CatTiposSolicitud.ObjRamas.iIdRama = (int)reader["iIdRama"];
+                        _CatTiposSolicitud.ObjRamas.cNombre = (string)reader["r.cNombre"];
                         _CatTiposSolicitud.ObjProcesos.iIdProceso = (int)reader["iIdProceso"];
+                        _CatTiposSolicitud.ObjProcesos.cNombre = (string)reader["p.cNombre"];
                         _CatTiposSolicitud.ObjUsuarioGestion.iIdUsuario = (int)reader["iIdUsuarioGestion"];
                         _CatTiposSolicitud.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
                         _CatTiposSolicitud.bActivo = Convert.ToBoolean(reader["bActivo"]);

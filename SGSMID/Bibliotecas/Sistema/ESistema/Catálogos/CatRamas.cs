@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ESistema.Catalogos
+namespace ESistema
 {
     /// <summary>
     /// Clase CatRamas que hace referencia a la tabla tbl_cat_ramas de la base de datos BD_SGS

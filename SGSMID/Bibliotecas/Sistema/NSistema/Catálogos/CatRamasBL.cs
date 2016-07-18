@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using System.Data;
 using DSistema;
 using ESistema;
-using ESistema.Catalogos;
 
-namespace NSistema.Catálogos
+namespace NSistema
 {
     public class CatRamasBL
     {

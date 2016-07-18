@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
 using DSistema;
 using ESistema;
-using ESistema.Catalogos;
 
 
 namespace NSistema
@@ -31,14 +29,14 @@ namespace NSistema
         }
 
         // Método para modificar Procesos BL
-        public int ModificarProcesos(CatProcesos _CatProcesos)
+        public void ModificarProcesos(CatProcesos _CatProcesos)
         {
             // Bloque para manejos de errores
             try
             {
                 // Definición y creación de la instancia DAL del tipo CatProcesosDAL
                 CatProcesosDAL DAL = new CatProcesosDAL();
-                return DAL.ModificarProceso(_CatProcesos);
+                DAL.ModificarProceso(_CatProcesos);
             }
             // Manejo de las excepciones de bloque try
             catch (Exception ex)
@@ -65,14 +63,14 @@ namespace NSistema
         }
 
         // Método para obtener Procesos BL
-        public List<CatProcesos> ObtenerProcesos(int _id = 0, string _filtro = null)
+        public List<CatProcesos> ObtenerProcesos(int id = 0, string filtro = null)
         {
             // Bloque para manejos de errores
             try
             {
                 // Definición y creación de la instancia DAL del tipo CatProcesosDAL
                 CatProcesosDAL DAL = new CatProcesosDAL();
-                return DAL.ObtenerProceso(_id, _filtro);
+                return DAL.ObtenerProceso(id, filtro);
             }
             // Manejo de las excepciones de bloque try
             catch (Exception ex)

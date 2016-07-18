@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DSistema;
 using ESistema;
 
-namespace NSistema.Catálogos
+namespace NSistema
 {
     public class CatPeriodosBL
     {
@@ -36,12 +36,25 @@ namespace NSistema.Catálogos
             }
         }
 
-        public List<CatPeriodos> list()
+        public void eliminarPeriodo(CatPeriodos _catperiodos)
+        {
+            try
+            {
+                CatPeriodosDAL _catperiodosDAL = new CatPeriodosDAL();
+                _catperiodosDAL.eliminarPeriodo(_catperiodos);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<CatPeriodos> list(int id = 0, string filtro = null)
         {
             try
             {
                 CatPeriodosDAL _catPeriodosDAL = new CatPeriodosDAL();
-                return _catPeriodosDAL.obtenerPeriodos();
+                return _catPeriodosDAL.obtenerPeriodos(id, filtro);
             }
             catch (Exception ex)
             {

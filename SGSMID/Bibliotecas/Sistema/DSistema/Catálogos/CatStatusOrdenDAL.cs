@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Conexion;
 using ESistema;
-using ESistema.Catalogos;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -20,7 +19,7 @@ namespace DSistema
             cn = new Conexion.Conexion();
         }
 
-         public int InsertarStatus(CatStatusOrden _catStatusOrden)
+        public int InsertarStatus(CatStatusOrden _catStatusOrden)
         {
             int id = 0;
             try
@@ -28,11 +27,11 @@ namespace DSistema
                 using (SqlCommand command = new SqlCommand("SPD_CAT_STATUS_ORDEN_INS", cn.Connection))
                 {
                     // Establece los valores que recibirá el procedimiento almacenado
-                    command.CommandType = System.Data.CommandType.StoredProcedure;                    
-                    command.Parameters.AddWithValue("@iIdProceso",_catStatusOrden.objProcesos.iIdProceso);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@iIdProceso", _catStatusOrden.objProcesos.iIdProceso);
                     command.Parameters.AddWithValue("@iIdStatus", _catStatusOrden.objStatus.iIdStatus);
                     command.Parameters.AddWithValue("@iIdStatusDestino", _catStatusOrden.objStatusDestino.iIdStatus);
-                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _catStatusOrden.ObjUsuarioGestion.iIdUsuario);                    
+                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _catStatusOrden.ObjUsuarioGestion.iIdUsuario);
 
                     // Abre la conexión a la BD
                     cn.OpenConnection();
@@ -70,7 +69,7 @@ namespace DSistema
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
                     // Establece los valores que recibirá el procedimiento almacenado
-                    command.Parameters.AddWithValue("@iIdStatusOrden", _catStatusOrden.iIdStatusOrden);                    
+                    command.Parameters.AddWithValue("@iIdStatusOrden", _catStatusOrden.iIdStatusOrden);
                     command.Parameters.AddWithValue("@iIdStatus", _catStatusOrden.objStatus.iIdStatus);
                     command.Parameters.AddWithValue("@iIdStatusDestino", _catStatusOrden.objStatusDestino.iIdStatus);
                     command.Parameters.AddWithValue("@iIdUsuarioGestion", _catStatusOrden.ObjUsuarioGestion.iIdUsuario);
@@ -145,7 +144,7 @@ namespace DSistema
         public List<CatStatusOrden> ObtenerStatusOrden(int id = 0, string filtro = null)
         {
             // Define e incializa la variable tipo que indica al procedimiento a que tabla hace referencia
-            string tipo = "status";
+            string tipo = "statusorden";
             // Define e incializa la lista que devolverá el método
             List<CatStatusOrden> list = new List<CatStatusOrden>();
             // Define CatStatus de tipo CatRamas en donde pondrá el resultado de cada registro el cual se irá añadiendo a la lista que se devolverá
@@ -177,15 +176,21 @@ namespace DSistema
                         // Creamos la instancia de _CatProcesos en donde se pondrán los datos del registro
                         _CatStatusOrden = new CatStatusOrden();
                         _CatStatusOrden.objProcesos = new CatProcesos();
+                        _CatStatusOrden.objStatus = new CatStatus();
+                        _CatStatusOrden.objStatusDestino = new CatStatus();
                         _CatStatusOrden.ObjUsuarioGestion = new Usuarios();
 
-                        // Asignamos los valores del registro al objeto _CatProcesos                        
-                        _CatStatusOrden.objProcesos.iIdProceso       = (int)reader["iIdProceso"];
-                        _CatStatusOrden.objStatus.iIdStatus          = (int)reader["iIdStatus"];
-                        _CatStatusOrden.objStatusDestino.iIdStatus   = (int)reader["iIdStatusDestino"];
+                        // Asignamos los valores del registro al objeto _CatProcesos 
+                        _CatStatusOrden.iIdStatusOrden = (int)reader["iIdStatusOrden"];
+                        _CatStatusOrden.objProcesos.iIdProceso = (int)reader["iIdProceso"];
+                        _CatStatusOrden.objProcesos.cNombre = (string)reader["pr.cNombre"];
+                        _CatStatusOrden.objStatus.iIdStatus = (int)reader["iIdStatus"];
+                        _CatStatusOrden.objStatus.cNombre = (string)reader["st.cNombre"];
+                        _CatStatusOrden.objStatusDestino.iIdStatus = (int)reader["iIdStatusDestino"];
+                        _CatStatusOrden.objStatusDestino.cNombre = (string)reader["st.cNombre"];
                         _CatStatusOrden.ObjUsuarioGestion.iIdUsuario = (int)reader["iIdUsuarioGestion"];
-                        _CatStatusOrden.dtFechaRegistro              = (DateTime)reader["dtFechaRegistro"];
-                        _CatStatusOrden.bActivo                      = Convert.ToBoolean(reader["bActivo"]);
+                        _CatStatusOrden.ObjUsuarioGestion.cNombreUsuario = (string)reader["us.cNombre"];
+                        _CatStatusOrden.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
 
                         // Agregamos el objeto con los datos a la lista que se devolverá
                         list.Add(_CatStatusOrden);
@@ -210,6 +215,6 @@ namespace DSistema
             // Devuelve la lista con los resultados obtenido
             return list;
         }
-    
+
     }
 }

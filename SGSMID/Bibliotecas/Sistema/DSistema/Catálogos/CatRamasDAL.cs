@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Conexion;
 using ESistema;
-using ESistema.Catalogos;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -25,7 +24,7 @@ namespace DSistema
 
         // Método para insertar una rama en la tabla tbl_cat_ramas, utilizando el procedimiento almacenado SPD_CAT_RAMAS_INS
         // Recibe el objeto _CatRamas con los datos a insertar y una vez insertado devuelve el id del registro insertado
-        public int InsertarRamas(ESistema.Catalogos.CatRamas _CatRamas)
+        public int InsertarRamas(CatRamas _CatRamas)
         {
             // Define e inicializa la variable id en donde recibira el valor devuelto por el procedimiento almacenado, que es el id del registro insertado
             int id = 0;
@@ -41,7 +40,7 @@ namespace DSistema
                     // Establece los valores que recibirá el procedimiento almacenado
                     command.Parameters.AddWithValue("@cNombre", _CatRamas.cNombre);
                     command.Parameters.AddWithValue("@iIdCentroCosto", _CatRamas.ObjCentrosCostos.iIdCentroCosto);
-                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _CatRamas.ObjUsuarioGestion.iIdUsuario);
+                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _CatRamas.ObjUsuarioGestion.iIdUsuarioGestion);
 
                     // Abre la conexión a la BD
                     cn.OpenConnection();
@@ -71,7 +70,7 @@ namespace DSistema
 
         // Método para modificar una rama en la tabla tbl_cat_ramas, utilizando el procedimiento almacenado SPD_CAT_RAMAS_UPD
         // Recibe el objeto _CatRamas con los datos a modificar y una vez modificado devuelve el id del registro modificado
-        public int ModificarRamas(ESistema.Catalogos.CatRamas _CatRamas)
+        public int ModificarRamas(CatRamas _CatRamas)
         {
             // Define e inicializa la variable id en donde recibira el valor devuelto por el procedimiento almacenado, que es el id del registro modificado
             int id = 0;
@@ -88,7 +87,7 @@ namespace DSistema
                     command.Parameters.AddWithValue("@iIdRama", _CatRamas.iIdRama);
                     command.Parameters.AddWithValue("@cNombre", _CatRamas.cNombre);
                     command.Parameters.AddWithValue("@iIdCentroCosto", _CatRamas.ObjCentrosCostos.iIdCentroCosto);
-                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _CatRamas.ObjUsuarioGestion.iIdUsuario);
+                    command.Parameters.AddWithValue("@iIdUsuarioGestion", _CatRamas.ObjUsuarioGestion.iIdUsuarioGestion);
 
                     // Abre la conexión a la BD
                     cn.OpenConnection();
@@ -118,7 +117,7 @@ namespace DSistema
 
         // Método para eliminar una rama en la tabla tbl_cat_ramas, utilizando el procedimiento almacenado SPD_CAT_RAMAS_DEL
         // Recibe el objeto _CatRamas con los datos a eliminar y una vez eliminado devuelve el id del registro eliminado
-        public int EliminarRamas(ESistema.Catalogos.CatRamas _CatRamas)
+        public int EliminarRamas(CatRamas _CatRamas)
         {
             // Define e inicializa la variable id en donde recibira el valor devuelto por el procedimiento almacenado, que es el id del registro modificado
             // Esto debido a que el procedimiento eliminar únicamente modifica el valor bActivo de la tabla, por lo cual es finalmente un proceso de modificación
@@ -131,7 +130,7 @@ namespace DSistema
                 {
                     // Establece que es un procedimiento almacenado
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    
+
                     // Establece los valores que recibirá el procedimiento almacenado
                     command.Parameters.AddWithValue("@iIdRama", _CatRamas.iIdRama);
 
@@ -208,9 +207,8 @@ namespace DSistema
                         _CatRamas.iIdRama = (int)reader["iIdRama"];
                         _CatRamas.cNombre = (string)reader["cNombre"];
                         _CatRamas.ObjCentrosCostos.iIdCentroCosto = (int)reader["iIdCentroCosto"];
-                        _CatRamas.ObjUsuarioGestion.iIdUsuario = (int)reader["iIdUsuarioGestion"];
+                        _CatRamas.ObjUsuarioGestion.iIdUsuarioGestion = (int)reader["iIdUsuarioGestion"];
                         _CatRamas.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
-                        _CatRamas.bActivo = Convert.ToBoolean(reader["bActivo"]);
 
                         // Agregamos el objeto con los datos a la lista que se devolverá
                         list.Add(_CatRamas);

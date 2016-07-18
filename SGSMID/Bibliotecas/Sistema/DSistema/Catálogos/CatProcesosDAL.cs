@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Conexion;
-using ESistema;
-using ESistema.Catalogos;
-using System.Data;
 using System.Data.SqlClient;
+using ESistema;
+using System.Data;
 
 namespace DSistema
 {
@@ -33,7 +31,7 @@ namespace DSistema
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@cNombre", _catProceso.cNombre);
                     command.Parameters.AddWithValue("@iIdRama", _catProceso.objRamas.iIdRama);
-                    command.Parameters.AddWithValue("@iIdPeriodo", _catProceso.objPeriodos.iIdPeriodo_p);
+                    command.Parameters.AddWithValue("@iIdPeriodo", _catProceso.objPeriodos.iIdPeriodo);
                     command.Parameters.AddWithValue("@iIdUsuarioGestion", _catProceso.ObjUsuarioGestion.iIdUsuario);
 
                     // Abre la conexión a la BD
@@ -41,6 +39,7 @@ namespace DSistema
 
                     //Ejecuta la instrucción y la variable id recibe el valor que devuelve el procedimiento almacenado
                     id = (int)command.ExecuteScalar();
+                    //command.ExecuteNonQuery();
                 }
 
             }
@@ -58,10 +57,10 @@ namespace DSistema
             }
             return id;
         }
-        public int ModificarProceso(CatProcesos _catProceso)
+        public void ModificarProceso(CatProcesos _catProceso)
         {
             // Define e inicializa la variable id en donde recibira el valor devuelto por el procedimiento almacenado, que es el id del registro modificado
-            int id = 0;
+            //int id = 0;
             // Bloque para manejos de errores
             try
             {
@@ -75,14 +74,15 @@ namespace DSistema
                     command.Parameters.AddWithValue("@iIdProceso", _catProceso.iIdProceso);
                     command.Parameters.AddWithValue("@cNombre", _catProceso.cNombre);
                     command.Parameters.AddWithValue("@iIdRama", _catProceso.objRamas.iIdRama);
-                    command.Parameters.AddWithValue("@iIdPeriodo", _catProceso.objPeriodos.iIdPeriodo_p);
+                    command.Parameters.AddWithValue("@iIdPeriodo", _catProceso.objPeriodos.iIdPeriodo);
                     command.Parameters.AddWithValue("@iIdUsuarioGestion", _catProceso.ObjUsuarioGestion.iIdUsuario);
 
                     // Abre la conexión a la BD
                     cn.OpenConnection();
 
                     // Ejecuta la instrucción y la variable id recibe el valor que devuelve el procedimiento almacenado
-                    id = (int)command.ExecuteScalar();
+                    //id = (int)command.ExecuteScalar();
+                    command.ExecuteNonQuery();
                 }
             }
             // Manejo de las excepciones de bloque try
@@ -101,7 +101,7 @@ namespace DSistema
                 cn.CloseConnection();
             }
             // Devuelve el id del registro modificado
-            return id;
+            //return id;
         }
         public int EliminarProceso(CatProcesos _catProceso)
         {
@@ -118,7 +118,7 @@ namespace DSistema
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
                     // Establece los valores que recibirá el procedimiento almacenado
-                    command.Parameters.AddWithValue("@iIdRama", _catProceso.iIdProceso);
+                    command.Parameters.AddWithValue("@iIdProceso", _catProceso.iIdProceso);
 
                     // Abre la conexión a la BD
                     cn.OpenConnection();
@@ -180,18 +180,20 @@ namespace DSistema
                         // Creamos la instancia de _CatProcesos en donde se pondrán los datos del registro
                         _CatProcesos = new CatProcesos();
                         // Definimos y creamos los objetos asociados a esta entidad _CatProcesos
-                        _CatProcesos.objPeriodos       = new CatPeriodos();
-                        _CatProcesos.objRamas          = new CatRamas();
+                        _CatProcesos.objPeriodos = new CatPeriodos();
+                        _CatProcesos.objRamas = new CatRamas();
                         _CatProcesos.ObjUsuarioGestion = new Usuarios();
 
                         // Asignamos los valores del registro al objeto _CatProcesos
-                        _CatProcesos.iIdProceso                     = (int)reader["iIdProceso"];
-                        _CatProcesos.cNombre                        = (string)reader["cNombre"];
-                        _CatProcesos.objPeriodos.iIdPeriodo_p       = (int)reader["iIdPeriodo"];
-                        _CatProcesos.objRamas.iIdRama               = (int)reader["iIdRama"];
-                        _CatProcesos.ObjUsuarioGestion.iIdUsuario   = (int)reader["iIdUsuarioGestion"];
-                        _CatProcesos.dtFechaRegistro                = (DateTime)reader["dtFechaRegistro"];
-                        _CatProcesos.bActivo                        = Convert.ToBoolean(reader["bActivo"]);
+                        _CatProcesos.iIdProceso = (int)reader["iIdProceso"];
+                        _CatProcesos.cNombre = (string)reader["cNombre"];
+                        _CatProcesos.objRamas.iIdRama = (int)reader["iIdRama"];
+                        _CatProcesos.objRamas.cNombre = (string)reader["r.cNombre"];
+                        _CatProcesos.objPeriodos.iIdPeriodo = (int)reader["iIdPeriodo"];
+                        _CatProcesos.objPeriodos.cNombre = (string)reader["pe.cNombre"];
+                        _CatProcesos.ObjUsuarioGestion.iIdUsuario = (int)reader["iIdUsuarioGestion"];
+                        _CatProcesos.ObjUsuarioGestion.cNombreUsuario = (string)reader["us.cNombre"];
+                        _CatProcesos.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
 
                         // Agregamos el objeto con los datos a la lista que se devolverá
                         list.Add(_CatProcesos);

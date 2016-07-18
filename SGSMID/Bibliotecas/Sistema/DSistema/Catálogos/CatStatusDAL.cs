@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Conexion;
-using ESistema;
-using ESistema.Catalogos;
-using System.Data;
 using System.Data.SqlClient;
+using ESistema;
+using System.Data;
 
 namespace DSistema
 {
@@ -32,10 +30,10 @@ namespace DSistema
                     // Establece los valores que recibirá el procedimiento almacenado
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@cNombre", _catStatus.cNombre);
-                    command.Parameters.AddWithValue("@iIdProceso",_catStatus.objProcesos.iIdProceso);
-                    command.Parameters.AddWithValue("@iOrden", _catStatus.iOrden);                    
+                    command.Parameters.AddWithValue("@iIdProceso", _catStatus.objProcesos.iIdProceso);
+                    command.Parameters.AddWithValue("@iOrden", _catStatus.iOrden);
                     command.Parameters.AddWithValue("@iIdUsuarioGestion", _catStatus.ObjUsuarioGestion.iIdUsuario);
-               
+
                     // Abre la conexión a la BD
                     cn.OpenConnection();
 
@@ -75,7 +73,7 @@ namespace DSistema
                     command.Parameters.AddWithValue("@iIdStatus", _catStatus.iIdStatus);
                     command.Parameters.AddWithValue("@cNombre", _catStatus.cNombre);
                     command.Parameters.AddWithValue("@iIdProceso", _catStatus.objProcesos.iIdProceso);
-                    command.Parameters.AddWithValue("@iOrden", _catStatus.iOrden);                    
+                    command.Parameters.AddWithValue("@idOrden", _catStatus.iOrden);
                     command.Parameters.AddWithValue("@iIdUsuarioGestion", _catStatus.ObjUsuarioGestion.iIdUsuario);
 
                     // Abre la conexión a la BD
@@ -178,18 +176,19 @@ namespace DSistema
                     while (reader.Read())
                     {
                         // Creamos la instancia de _CatProcesos en donde se pondrán los datos del registro
-                        _CatStatus = new CatStatus();                        
-                        _CatStatus.objProcesos = new CatProcesos();                        
+                        _CatStatus = new CatStatus();
+                        _CatStatus.objProcesos = new CatProcesos();
                         _CatStatus.ObjUsuarioGestion = new Usuarios();
 
                         // Asignamos los valores del registro al objeto _CatProcesos
-                        _CatStatus.iIdStatus                    = (int)reader["iIdStatus"];
-                        _CatStatus.cNombre                      = (string)reader["cNombre"];
-                        _CatStatus.objProcesos.iIdProceso       = (int)reader["iIdProceso"];
-                        _CatStatus.iOrden                       = (int)reader["iOrden"];
+                        _CatStatus.iIdStatus = (int)reader["iIdStatus"];
+                        _CatStatus.cNombre = (string)reader["cNombre"];
+                        _CatStatus.objProcesos.iIdProceso = (int)reader["iIdProceso"];
+                        _CatStatus.objProcesos.cNombre = (string)reader["pr.cNombre"];
+                        _CatStatus.iOrden = (int)reader["iOrden"];
                         _CatStatus.ObjUsuarioGestion.iIdUsuario = (int)reader["iIdUsuarioGestion"];
-                        _CatStatus.dtFechaRegistro              = (DateTime)reader["dtFechaRegistro"];
-                        _CatStatus.bActivo                      = Convert.ToBoolean(reader["bActivo"]);
+                        _CatStatus.ObjUsuarioGestion.cNombreUsuario = (string)reader["us.cNombre"];
+                        _CatStatus.dtFechaRegistro = (DateTime)reader["dtFechaRegistro"];
 
                         // Agregamos el objeto con los datos a la lista que se devolverá
                         list.Add(_CatStatus);

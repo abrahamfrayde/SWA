@@ -8,17 +8,16 @@ namespace ESistema
 {
     public class CatPeriodos
     {
-        public int iIdPeriodo_p { get; set; }
-        public string cNombre_p { get; set; }
-        public DateTime dtFechaInicial_p { get; set; }
-        public DateTime dtFechaFinal_p { get; set; }
-        public string cPresidenteMuninicipal_p { get; set; }
-        public DateTime dtFechaRegistro_p { get; set; }
-        public bool bActivo_p { get; set; }
-        public int iIdUsuario_p { get; set; }
+        public int iIdPeriodo { get; set; }
+        public string cNombre { get; set; }
+        public DateTime dtFechaInicial { get; set; }
+        public DateTime dtFechaFinal { get; set; }
+        public string cPresidenteMunicipal { get; set; }
+        public DateTime dtFechaRegistro { get; set; }
+        public bool bActivo { get; set; }
+        public int iIdUsuario { get; set; }
 
 
         public CatPeriodos() { }
     }
 }
-

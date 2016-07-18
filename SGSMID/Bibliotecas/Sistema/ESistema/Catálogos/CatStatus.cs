@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ESistema.Catalogos
+namespace ESistema
 {
     public class CatStatus
     {
