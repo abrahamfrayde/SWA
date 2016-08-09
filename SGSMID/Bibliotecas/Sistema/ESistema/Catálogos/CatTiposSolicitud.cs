@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ESistema.Catalogos
+namespace ESistema
 {
     /// <summary>
     /// Clase CatTiposSolicitud que hace referencia a la tabla tbl_cat_tipossolicitud de la base de datos BD_SGS
